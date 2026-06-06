@@ -16,6 +16,7 @@ def scan_server(server_ref: str) -> dict[str, Any]:
         _check_command_injection,
         _check_unconstrained_params,
         _check_tool_access_control,
+        _check_excessive_permissions,
     ]
     for check in checks:
         found = check(source, server_ref)
@@ -142,14 +143,17 @@ def _check_command_injection(source: str, server: str) -> list[dict]:
     """Check for command injection vulnerabilities."""
     issues = []
     cmd_patterns = [
-        (r"os\.system\(.*request", "User input passed to os.system()"),
-        (r"subprocess\.(call|run|Popen)\(.*shell\s*=\s*True.*request", "Shell command execution with user input"),
-        (r"exec\(.*request", "User input passed to exec()"),
-        (r"child_process\.exec\(.*request", "Node.js child_process.exec with user input"),
+        (r"os\.system\(.*(?:request|input|user|args)", "User input passed to os.system()", "critical"),
+        (r"subprocess\.(call|run|Popen|check_output)\(.*(?:request|input|user|args)", "User input passed to subprocess without sanitization", "critical"),
+        (r"subprocess\.(call|run|Popen)\(.*shell\s*=\s*True.*request", "Shell command execution with user input", "critical"),
+        (r"exec\(.*(?:request|input|user|args)", "User input passed to exec()", "critical"),
+        (r"eval\((?!['\"])(?:.*(?:request|input|user|args))", "User input evaluated as code via eval()", "critical"),
+        (r"child_process\.exec\(.*request", "Node.js child_process.exec with user input", "critical"),
+        (r"shell\s*=\s*True", "subprocess called with shell=True (shell injection risk)", "high"),
     ]
-    for pat, desc in cmd_patterns:
+    for pat, desc, severity in cmd_patterns:
         if re.search(pat, source, re.IGNORECASE):
-            issues.append({"severity": "critical", "title": "Command injection risk", "detail": desc})
+            issues.append({"severity": severity, "title": "Command injection risk", "detail": desc})
     return issues
 
 
@@ -163,7 +167,6 @@ def _check_unconstrained_params(source: str, server: str) -> list[dict]:
     """
     issues = []
     # Look for tool parameter definitions without constraints
-    # Pattern: "type": "string" without maxLength, pattern, or enum nearby
     param_blocks = re.finditer(
         r'"type"\s*:\s*"string".*?(?:"maxLength"|"pattern"|"enum"|"minimum"|"maximum"|})',
         source, re.DOTALL,
@@ -206,7 +209,6 @@ def _check_tool_access_control(source: str, server: str) -> list[dict]:
     in mcp-server-kubernetes (CVE-2026-46519).
     """
     issues = []
-    # Pattern: filtering in ListToolsRequestSchema handler but not in CallToolRequestSchema
     has_list_filter = bool(re.search(
         r'(ALLOWED_TOOLS|ALLOW_ONLY|tools/list|ListToolsRequest).*?(filter|restrict|allow)',
         source, re.IGNORECASE | re.DOTALL,
@@ -226,4 +228,25 @@ def _check_tool_access_control(source: str, server: str) -> list[dict]:
                 "See CVE-2026-46519 for a real-world example."
             ),
         })
+    return issues
+
+
+def _check_excessive_permissions(source: str, server: str) -> list[dict]:
+    """Check for tools requesting broader access than needed."""
+    issues = []
+    danger_patterns = [
+        (r'--allow[=-]all|--no-auth|--skip-auth|--disable-auth',
+         "Authentication bypass flag detected"),
+        (r'readFile.*\*|writeFile.*\*|readdirSync.*\/$',
+         "Unrestricted filesystem glob (reads/writes everything)"),
+        (r"chmod\s+[0-7]*7[0-7]*\s",
+         "Setting world-readable/writable permissions"),
+    ]
+    for pat, desc in danger_patterns:
+        if re.search(pat, source, re.IGNORECASE):
+            issues.append({
+                "severity": "medium",
+                "title": "Excessive permissions",
+                "detail": desc,
+            })
     return issues
