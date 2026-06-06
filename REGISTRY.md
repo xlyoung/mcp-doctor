@@ -2,30 +2,30 @@
 
 A curated, scored database of Model Context Protocol (MCP) servers. Use `mcp-doctor list` to browse, or `mcp-doctor scan` to check any server before installing.
 
-> **Last updated:** 2026-06-06 | **Total servers:** 70+ | **Categories:** 20
+> **Last updated:** 2026-06-07 | **Total servers:** 91+ | **Categories:** 20+
 
 ## 📊 Top Servers by Score
 
 | Server | Score | Category | Stars | Description |
 |--------|-------|----------|-------|-------------|
-| microsoft/playwright-mcp | 96 | web | 33.6k | Official Microsoft Playwright MCP server |
 | github/github-mcp-server | 97 | devops | 30.5k | GitHub's official MCP server |
+| ChromeDevTools/chrome-devtools-mcp | 97 | web | 43k | Official Chrome DevTools for coding agents |
+| microsoft/playwright-mcp | 96 | web | 33.6k | Official Microsoft Playwright MCP server |
 | PrefectHQ/fastmcp | 95 | ai | 25.5k | Fast, Pythonic way to build MCP servers |
+| oraios/serena | 95 | ai | 25k | Coding agent with symbolic code operations |
+| czlonkowski/n8n-mcp | 90 | automation | 21.6k | Build n8n workflows from AI assistants |
 | activepieces/activepieces | 90 | automation | 22.6k | AI workflow automation with 400+ MCP servers |
+| mindsdb/mindsdb | 92 | database | 39.3k | Unified data platform as MCP server |
 | googleapis/mcp-toolbox | 93 | database | 15.5k | Google's MCP Toolbox for Databases |
 | GLips/Figma-Context-MCP | 93 | design | 15k | Figma layout for AI coding agents |
-| modelcontextprotocol/inspector | 92 | devtools | 10k | Official MCP inspector & debugger |
-| mcp-use/mcp-use | 89 | framework | 10.1k | Fullstack MCP framework |
-| @modelcontextprotocol/server-filesystem | 92 | filesystem | 12k | Secure file system access |
-| @modelcontextprotocol/server-github | 91 | devops | 12k | GitHub API: repos, issues, PRs |
 
 ## 📂 Categories
 
 ### 🗄️ Database (11 servers)
 PostgreSQL, MySQL, SQLite, Redis, MongoDB, Qdrant, ClickHouse, Elasticsearch, Supabase, Neon, Google Toolbox
 
-### 🌐 Web & Search (9 servers)
-Brave Search, Playwright, Puppeteer, Firecrawl, Fetch, Tavily, Chrome MCP, BrowserMCP, bb-browser
+### 🌐 Web & Search (10 servers)
+Brave Search, Playwright, Puppeteer, Firecrawl, Fetch, Tavily, Chrome MCP, BrowserMCP, bb-browser, Chrome DevTools MCP
 
 ### 🔧 DevOps & Git (8 servers)
 GitHub (official & GitHub MCP), GitLab, Docker, Kubernetes, Git, GitLab CI, XcodeBuild MCP
@@ -39,8 +39,8 @@ Slack, Discord, Gmail, Telegram, WhatsApp
 ### 🧠 Knowledge & Notes (4 servers)
 Notion, Obsidian, Memory, Confluence
 
-### 🤖 AI / ML (5 servers)
-FastMCP, Hugging Face, Ollama, Replicate, OpenAI
+### 🤖 AI / ML (7 servers)
+FastMCP, Hugging Face, Ollama, Replicate, OpenAI, Serena, Headroom
 
 ### 📋 Productivity (6 servers)
 Google Maps, Linear, Airtable, Google Calendar, Todoist, Kreuzberg (document processing)
@@ -60,11 +60,13 @@ Figma Context MCP
 ### ☁️ Cloud (3 servers)
 AWS, Everything (reference), ActivePieces
 
-### 🔄 Automation (1 server)
+### 🔄 Automation (2 servers)
 ActivePieces — AI workflow automation with ~400 built-in MCP servers
+n8n-mcp — Build n8n workflows from AI assistants
 
-### 🏗️ Framework (1 server)
+### 🏗️ Framework (2 servers)
 mcp-use — Fullstack MCP framework for ChatGPT/Claude & MCP Servers
+fastapi-mcp — Expose FastAPI endpoints as MCP tools with OAuth
 
 ## 🔒 Security Scoring
 

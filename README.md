@@ -28,7 +28,7 @@ The MCP ecosystem is exploding — hundreds of servers, but no way to know which
 | Security scanning | ✅ | ✅ | ✅ | ✅ |
 | Quality scoring (0-100) | ✅ | ❌ | ❌ | ❌ |
 | Server comparison | ✅ | ❌ | ❌ | ❌ |
-| Curated registry (70+) | ✅ | ❌ | ❌ | ❌ |
+| Curated registry (91+) | ✅ | ❌ | ❌ | ❌ |
 | One-command install | ✅ | ❌ | ❌ | ❌ |
 | Categories & browsing | ✅ | ❌ | ❌ | ❌ |
 | CI/CD integration | ✅ | ✅ | ❌ | ✅ |
@@ -41,7 +41,7 @@ MCP Doctor is the only tool that combines **security scanning**, **quality scori
 - 🔒 **Security Scan** — Detect prompt injection vectors, unsafe file access, network exfiltration risks, and credential leakage
 - 📊 **Quality Score** — Automated 0-100 scoring based on: security, maintenance, documentation, testing, community
 - ⚖️ **Compare** — Side-by-side comparison of two MCP servers across all quality dimensions
-- 📦 **Registry** — Curated database of 70+ popular MCP servers with pre-computed scores and categories
+- 📦 **Registry** — Curated database of 91+ popular MCP servers with pre-computed scores and categories
 - ⚡ **Quick Install** — `mcp-doctor install <server>` — one command to scan + score + install
 - 🩺 **CI/CD Audit** — `mcp-doctor audit <server>` — full report with exit codes for pipelines
 - 📈 **Stats** — Registry overview with category breakdowns and averages
