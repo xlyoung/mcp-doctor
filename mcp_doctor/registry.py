@@ -76,8 +76,25 @@ _REGISTRY: list[dict[str, Any]] = [
     # ── Design ───────────────────────────────────────────────────
     {"name": "Figma-Context-MCP", "repo": "GLips/Figma-Context-MCP", "category": "design", "stars": 15007, "score": 93, "description": "Figma layout information for AI coding agents like Cursor", "lang": "typescript"},
 
-    # ── Headless CMS / Content ───────────────────────────────────
+    # ── Headless CMS / Content ────────────────────────────────
     {"name": "mcp-server-strapi", "repo": "strapi/mcp-server-strapi", "category": "cms", "stars": 100, "score": 66, "description": "Strapi headless CMS content management", "lang": "typescript"},
+
+    # ── System / Desktop ──────────────────────────────────────
+    {"name": "DesktopCommanderMCP", "repo": "wonderwhy-er/DesktopCommanderMCP", "category": "system", "stars": 6114, "score": 78, "description": "Execute terminal commands, manage files and processes from MCP clients", "lang": "typescript"},
+    {"name": "Windows-MCP", "repo": "CursorTouch/Windows-MCP", "category": "system", "stars": 5879, "score": 75, "description": "Windows OS automation — UI interaction, app control, clipboard, and screen capture", "lang": "python"},
+
+    # ── Reverse Engineering / Binary ──────────────────────────
+    {"name": "GhidraMCP", "repo": "LaurieWired/GhidraMCP", "category": "security", "stars": 9137, "score": 88, "description": "Ghidra reverse engineering via MCP — decompile, analyze, and explore binaries with AI", "lang": "java"},
+
+    # ── Communication (new) ───────────────────────────────────
+    {"name": "whatsapp-mcp", "repo": "lharries/whatsapp-mcp", "category": "communication", "stars": 5735, "score": 76, "description": "WhatsApp messaging integration — send, receive, and search messages", "lang": "python"},
+
+    # ── Mobile / iOS Dev ──────────────────────────────────────
+    {"name": "XcodeBuildMCP", "repo": "getsentry/XcodeBuildMCP", "category": "devops", "stars": 5844, "score": 85, "description": "Xcode project build, test, and run for iOS/macOS development via MCP", "lang": "typescript"},
+
+    # ── Developer Tools ───────────────────────────────────────
+    {"name": "mcp-inspector", "repo": "modelcontextprotocol/inspector", "category": "devtools", "stars": 10011, "score": 92, "description": "Official MCP inspector — debug and test MCP servers interactively", "lang": "typescript"},
+    {"name": "git-mcp", "repo": "idosal/git-mcp", "category": "devtools", "stars": 8142, "score": 86, "description": "Instant MCP server for any GitHub repo — code search and documentation retrieval", "lang": "typescript"},
 ]
 
 

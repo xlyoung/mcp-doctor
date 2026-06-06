@@ -102,16 +102,18 @@ $ mcp-doctor compare @modelcontextprotocol/server-postgres mcp-server-mysql
 Browse the full registry: **[REGISTRY.md](./REGISTRY.md)**
 
 Categories:
-- 🗄️ Database — PostgreSQL, MySQL, SQLite, Redis, MongoDB, Qdrant, ClickHouse, Supabase, Neon
+- 🗄️ Database — PostgreSQL, MySQL, SQLite, Redis, MongoDB, Qdrant, ClickHouse, Supabase, Neon, Google Toolbox
 - 📁 File System — Local files, S3
 - 🌐 Web — Brave Search, Playwright, Puppeteer, Firecrawl, Chrome MCP
-- 🔧 DevOps — GitHub (official), GitLab, Docker, Kubernetes, Git
-- 💬 Communication — Slack, Discord, Gmail, Telegram
+- 🔧 DevOps — GitHub (official & MCP), GitLab, Docker, Kubernetes, Git, XcodeBuild
+- 💬 Communication — Slack, Discord, Gmail, Telegram, WhatsApp
 - 🧠 Knowledge — Notion, Obsidian, Memory, Confluence
 - 🤖 AI/ML — FastMCP, Hugging Face, Replicate, Ollama
-- 🔒 Security — Semgrep, NVD CVE lookup
+- 🔒 Security — Semgrep, NVD CVE, GhidraMCP (reverse engineering)
 - 🎨 Design — Figma Context MCP
 - 📋 Productivity — Google Maps, Linear, Airtable, Google Calendar, Todoist
+- 🖥️ System — DesktopCommanderMCP, Windows-MCP
+- 🛠️ Developer Tools — MCP Inspector, git-mcp
 
 ## 🛠️ Development
 

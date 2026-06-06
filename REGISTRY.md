@@ -2,7 +2,7 @@
 
 A curated, scored database of Model Context Protocol (MCP) servers. Use `mcp-doctor list` to browse, or `mcp-doctor scan` to check any server before installing.
 
-> **Last updated:** 2026-06-06 | **Total servers:** 50+ | **Categories:** 14
+> **Last updated:** 2026-06-06 | **Total servers:** 60+ | **Categories:** 17
 
 ## 📊 Top Servers by Score
 
@@ -13,11 +13,11 @@ A curated, scored database of Model Context Protocol (MCP) servers. Use `mcp-doc
 | PrefectHQ/fastmcp | 95 | ai | 25.5k | Fast, Pythonic way to build MCP servers |
 | googleapis/mcp-toolbox | 93 | database | 15.5k | Google's MCP Toolbox for Databases |
 | GLips/Figma-Context-MCP | 93 | design | 15k | Figma layout for AI coding agents |
+| modelcontextprotocol/inspector | 92 | devtools | 10k | Official MCP inspector & debugger |
 | @modelcontextprotocol/server-filesystem | 92 | filesystem | 12k | Secure file system access |
 | @modelcontextprotocol/server-github | 91 | devops | 12k | GitHub API: repos, issues, PRs |
 | @modelcontextprotocol/server-sqlite | 91 | database | 12k | SQLite with built-in analysis |
-| @modelcontextprotocol/server-postgres | 90 | database | 12k | PostgreSQL database access |
-| @modelcontextprotocol/server-git | 90 | devops | 12k | Local git operations |
+| hangwin/mcp-chrome | 90 | web | 11.9k | Chrome extension MCP for browser automation |
 
 ## 📂 Categories
 
@@ -27,14 +27,14 @@ PostgreSQL, MySQL, SQLite, Redis, MongoDB, Qdrant, ClickHouse, Elasticsearch, Su
 ### 🌐 Web & Search (7 servers)
 Brave Search, Playwright, Puppeteer, Firecrawl, Fetch, Tavily, Chrome MCP
 
-### 🔧 DevOps & Git (7 servers)
-GitHub (official), GitLab, Docker, Kubernetes, Git, GitLab CI
+### 🔧 DevOps & Git (8 servers)
+GitHub (official & GitHub MCP), GitLab, Docker, Kubernetes, Git, GitLab CI, XcodeBuild MCP
 
 ### 📁 File System (2 servers)
 Filesystem, S3
 
-### 💬 Communication (4 servers)
-Slack, Discord, Gmail, Telegram
+### 💬 Communication (5 servers)
+Slack, Discord, Gmail, Telegram, WhatsApp
 
 ### 🧠 Knowledge & Notes (4 servers)
 Notion, Obsidian, Memory, Confluence
@@ -45,8 +45,14 @@ FastMCP, Hugging Face, Ollama, Replicate, OpenAI
 ### 📋 Productivity (5 servers)
 Google Maps, Linear, Airtable, Google Calendar, Todoist
 
-### 🔒 Security (2 servers)
-Semgrep, NVD CVE
+### 🔒 Security (3 servers)
+Semgrep, NVD CVE, GhidraMCP
+
+### 🖥️ System & Desktop (2 servers)
+DesktopCommanderMCP, Windows-MCP
+
+### 🛠️ Developer Tools (2 servers)
+MCP Inspector, git-mcp
 
 ### 🎨 Design (1 server)
 Figma Context MCP
