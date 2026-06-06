@@ -171,6 +171,80 @@ def compare(server_a: str, server_b: str, as_json: bool):
         console.print(f"\n[yellow]\u26a0 Both servers are comparable. Choose based on your specific needs.[/yellow]")
 
 
+@main.command()
+@click.argument("server")
+@click.option("--json", "as_json", is_flag=True, help="Output as JSON")
+@click.option("--threshold", "-t", default=50, type=int, help="Minimum score to pass (default: 50)")
+@click.option("--fail-on-critical", is_flag=True, default=True, help="Fail if critical issues found (default: true)")
+def audit(server: str, as_json: bool, threshold: int, fail_on_critical: bool):
+    """Run a full security + quality audit. Designed for CI/CD pipelines."""
+    scan_result = scan_server(server)
+    score_result = score_server(server)
+
+    critical = scan_result.get("critical", 0)
+    high = scan_result.get("high", 0)
+    total_score = score_result.get("total", 0)
+    passed = total_score >= threshold and not (fail_on_critical and critical > 0)
+
+    report = {
+        "server": server,
+        "passed": passed,
+        "score": total_score,
+        "threshold": threshold,
+        "issues": {
+            "critical": critical,
+            "high": high,
+            "medium": scan_result.get("medium", 0),
+            "low": scan_result.get("low", 0),
+            "total": len(scan_result.get("issues", [])),
+        },
+        "scan": scan_result,
+        "quality": score_result,
+    }
+
+    if as_json:
+        click.echo(json.dumps(report, indent=2))
+    else:
+        _render_audit(report)
+
+    if not passed:
+        if critical > 0:
+            console.print(f"\n[red bold]✖ FAILED: {critical} critical security issue(s) found[/red bold]")
+        if total_score < threshold:
+            console.print(f"\n[red bold]✖ FAILED: Score {total_score}/100 is below threshold {threshold}[/red bold]")
+        sys.exit(1)
+    else:
+        console.print(f"\n[green bold]✔ PASSED: {server} — score {total_score}/100, {len(scan_result.get('issues', []))} issue(s)[/green bold]")
+
+
+def _render_audit(report: dict):
+    """Render a comprehensive audit report."""
+    server = report["server"]
+    score = report["score"]
+    issues = report["issues"]
+    color = "green" if score >= 70 else "yellow" if score >= 40 else "red"
+
+    console.print(Panel.fit(
+        f"[bold]MCP Doctor Audit Report[/bold]\n"
+        f"  Server:  [cyan]{server}[/cyan]\n"
+        f"  Score:   [{color} bold]{score}/100[/{color} bold]\n"
+        f"  Issues:  [red]{issues['critical']}[/red] critical, "
+        f"[red]{issues['high']}[/red] high, "
+        f"[yellow]{issues['medium']}[/yellow] medium, "
+        f"[blue]{issues['low']}[/blue] low",
+        title="🩺 Audit",
+        border_style="cyan",
+    ))
+
+    # Security scan details
+    console.print("\n[bold cyan]▸ Security Scan[/bold cyan]")
+    _render_scan(report["scan"])
+
+    # Quality breakdown
+    console.print("\n[bold cyan]▸ Quality Score[/bold cyan]")
+    _render_score(report["quality"])
+
+
 @main.command(name="stats")
 def stats_cmd():
     """Show registry statistics."""

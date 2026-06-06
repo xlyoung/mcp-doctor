@@ -32,6 +32,7 @@ The MCP ecosystem is exploding — hundreds of servers, but no way to know which
 | One-command install | ✅ | ❌ | ❌ | ❌ |
 | Categories & browsing | ✅ | ❌ | ❌ | ❌ |
 | CI/CD integration | ✅ | ✅ | ❌ | ✅ |
+| CI/CD audit (exit codes) | ✅ | ❌ | ❌ | ❌ |
 
 MCP Doctor is the only tool that combines **security scanning**, **quality scoring**, **server comparison**, and a **curated registry** into a single CLI.
 
@@ -42,6 +43,7 @@ MCP Doctor is the only tool that combines **security scanning**, **quality scori
 - ⚖️ **Compare** — Side-by-side comparison of two MCP servers across all quality dimensions
 - 📦 **Registry** — Curated database of 70+ popular MCP servers with pre-computed scores and categories
 - ⚡ **Quick Install** — `mcp-doctor install <server>` — one command to scan + score + install
+- 🩺 **CI/CD Audit** — `mcp-doctor audit <server>` — full report with exit codes for pipelines
 - 📈 **Stats** — Registry overview with category breakdowns and averages
 
 ## 🚀 Quick Start
@@ -64,6 +66,10 @@ mcp-doctor list --category database --sort score
 
 # Install with confidence (blocks on critical security issues)
 mcp-doctor install @modelcontextprotocol/server-github
+
+# Full audit for CI/CD (exits non-zero on failure)
+mcp-doctor audit @modelcontextprotocol/server-filesystem --threshold 60
+mcp-doctor audit @modelcontextprotocol/server-filesystem --json  # machine-readable
 
 # View registry stats
 mcp-doctor stats

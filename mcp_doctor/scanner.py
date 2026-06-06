@@ -12,6 +12,8 @@ def scan_server(server_ref: str) -> dict[str, Any]:
         _check_path_traversal,
         _check_credential_leakage,
         _check_network_exfiltration,
+        _check_ssrf,
+        _check_command_injection,
     ]
     for check in checks:
         found = check(source, server_ref)
@@ -115,4 +117,35 @@ def _check_network_exfiltration(source: str, server: str) -> list[dict]:
     for pat, desc in suspicious:
         if re.search(pat, source, re.IGNORECASE):
             issues.append({"severity": "critical", "title": "Network exfiltration risk", "detail": desc})
+    return issues
+
+
+def _check_ssrf(source: str, server: str) -> list[dict]:
+    """Check for Server-Side Request Forgery vulnerabilities."""
+    issues = []
+    ssrf_patterns = [
+        (r"requests\.(get|post|put)\(.*f['\"]http", "Dynamic URL construction from user input (requests)"),
+        (r"httpx\.(get|post|put)\(.*f['\"]http", "Dynamic URL construction from user input (httpx)"),
+        (r"fetch\(.*\+.*request", "User-controlled URL passed to fetch"),
+        (r"169\.254\.169\.254", "Cloud metadata endpoint referenced (potential SSRF target)"),
+        (r"localhost:\d+", "Localhost reference detected (potential SSRF to internal services)"),
+    ]
+    for pat, desc in ssrf_patterns:
+        if re.search(pat, source, re.IGNORECASE):
+            issues.append({"severity": "high", "title": "SSRF risk", "detail": desc})
+    return issues
+
+
+def _check_command_injection(source: str, server: str) -> list[dict]:
+    """Check for command injection vulnerabilities."""
+    issues = []
+    cmd_patterns = [
+        (r"os\.system\(.*request", "User input passed to os.system()"),
+        (r"subprocess\.(call|run|Popen)\(.*shell\s*=\s*True.*request", "Shell command execution with user input"),
+        (r"exec\(.*request", "User input passed to exec()"),
+        (r"child_process\.exec\(.*request", "Node.js child_process.exec with user input"),
+    ]
+    for pat, desc in cmd_patterns:
+        if re.search(pat, source, re.IGNORECASE):
+            issues.append({"severity": "critical", "title": "Command injection risk", "detail": desc})
     return issues
