@@ -98,6 +98,8 @@ MCP Doctor scans for common MCP vulnerability patterns:
 - **Supply Chain** — Typosquatting, abandoned dependencies, known CVEs
 - **SSRF** — Server-side request forgery via unvalidated URL parameters
 - **Command Injection** — Shell command execution with unsanitized input
+- **Unconstrained Parameters** — String params without maxLength/pattern/enum (DoS + injection chain risk)
+- **Tool Access Control Bypass** — Presentation-layer filtering without execution-layer enforcement (CVE-2026-46519 pattern)
 
 ## ⚖️ Compare Servers
 

@@ -14,6 +14,8 @@ def scan_server(server_ref: str) -> dict[str, Any]:
         _check_network_exfiltration,
         _check_ssrf,
         _check_command_injection,
+        _check_unconstrained_params,
+        _check_tool_access_control,
     ]
     for check in checks:
         found = check(source, server_ref)
@@ -148,4 +150,80 @@ def _check_command_injection(source: str, server: str) -> list[dict]:
     for pat, desc in cmd_patterns:
         if re.search(pat, source, re.IGNORECASE):
             issues.append({"severity": "critical", "title": "Command injection risk", "detail": desc})
+    return issues
+
+
+def _check_unconstrained_params(source: str, server: str) -> list[dict]:
+    """Check for unconstrained string parameters in tool definitions.
+
+    Detects MCP tool schemas where string parameters lack maxLength, pattern,
+    or enum constraints — a systematic security gap identified by the MCP
+    community (see modelcontextprotocol/servers#3537). Unconstrained params
+    enable DoS, prompt injection amplification, and injection chains.
+    """
+    issues = []
+    # Look for tool parameter definitions without constraints
+    # Pattern: "type": "string" without maxLength, pattern, or enum nearby
+    param_blocks = re.finditer(
+        r'"type"\s*:\s*"string".*?(?:"maxLength"|"pattern"|"enum"|"minimum"|"maximum"|})',
+        source, re.DOTALL,
+    )
+    unconstrained = 0
+    for match in param_blocks:
+        block = match.group(0)
+        if not re.search(r'"maxLength"|"pattern"|"enum"', block):
+            unconstrained += 1
+
+    if unconstrained >= 3:
+        issues.append({
+            "severity": "medium",
+            "title": "Unconstrained string parameters",
+            "detail": (
+                f"Found {unconstrained} string parameters without maxLength/pattern/enum "
+                "constraints. This enables DoS via oversized inputs and weakens the "
+                "defense against prompt injection attacks."
+            ),
+        })
+
+    # Also check for very long default maxLength values
+    long_limits = re.finditer(r'"maxLength"\s*:\s*(\d+)', source)
+    for match in long_limits:
+        limit = int(match.group(1))
+        if limit > 100000:
+            issues.append({
+                "severity": "low",
+                "title": "Excessive maxLength on parameter",
+                "detail": f"maxLength of {limit} chars is effectively unconstrained; consider tightening to ≤10000",
+            })
+    return issues
+
+
+def _check_tool_access_control(source: str, server: str) -> list[dict]:
+    """Check for presentation-layer-only access control.
+
+    Detects patterns where tool access controls are enforced at discovery
+    (tools/list) but not at execution (tools/call) — a bypass pattern seen
+    in mcp-server-kubernetes (CVE-2026-46519).
+    """
+    issues = []
+    # Pattern: filtering in ListToolsRequestSchema handler but not in CallToolRequestSchema
+    has_list_filter = bool(re.search(
+        r'(ALLOWED_TOOLS|ALLOW_ONLY|tools/list|ListToolsRequest).*?(filter|restrict|allow)',
+        source, re.IGNORECASE | re.DOTALL,
+    ))
+    has_call_filter = bool(re.search(
+        r'(tools/call|CallToolRequest).*?(filter|restrict|allow|check)',
+        source, re.IGNORECASE | re.DOTALL,
+    ))
+
+    if has_list_filter and not has_call_filter:
+        issues.append({
+            "severity": "high",
+            "title": "Tool access control bypass risk",
+            "detail": (
+                "Tool restrictions appear enforced at discovery (tools/list) but not at "
+                "execution (tools/call). Clients can invoke restricted tools directly. "
+                "See CVE-2026-46519 for a real-world example."
+            ),
+        })
     return issues
