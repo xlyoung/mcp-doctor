@@ -154,6 +154,24 @@ _REGISTRY: list[dict[str, Any]] = [
 
     # ── Framework / FastAPI (new) ───────────────────────────
     {"name": "fastapi-mcp", "repo": "tadata-org/fastapi_mcp", "category": "framework", "stars": 11897, "score": 89, "description": "Expose FastAPI endpoints as MCP tools with automatic schema generation and OAuth support", "lang": "python"},
+
+    # ── Design / Design System (new) ─────────────────────────
+    {"name": "design-extract", "repo": "Manavarya09/design-extract", "category": "design", "stars": 3074, "score": 85, "description": "Extract any website's complete design system — DTCG tokens, semantic+primitive+composite, MCP server for Claude Code/Cursor/Windsurf, multi-platform emitters (iOS SwiftUI, Android Compose, Flutter), Tailwind v4, Figma variables", "lang": "typescript"},
+
+    # ── Search / Aggregator (new) ────────────────────────────
+    {"name": "anysearch-mcp-server", "repo": "anysearch-ai/anysearch-mcp-server", "category": "web", "stars": 1023, "score": 78, "description": "Unified real-time search engine skill for AI agents — one MCP server for multiple search providers", "lang": "typescript"},
+
+    # ── Security / CVE Intelligence (new) ────────────────────
+    {"name": "cve-mcp-server", "repo": "mukul975/cve-mcp-server", "category": "security", "stars": 952, "score": 86, "description": "Production-grade MCP server with 27 security intelligence tools across 21 APIs — CVE lookup, EPSS scoring, CISA KEV, MITRE ATT&CK, Shodan, VirusTotal", "lang": "python"},
+
+    # ── Knowledge / Memory (new) ─────────────────────────────
+    {"name": "stash", "repo": "alash3al/stash", "category": "knowledge", "stars": 710, "score": 80, "description": "Persistent memory layer for AI agents — episodes, facts, and working context stored in Postgres with MCP server. Self-hosted, single binary", "lang": "go"},
+
+    # ── Security / Pentesting (new) ──────────────────────────
+    {"name": "pentest-ai", "repo": "0xSteph/pentest-ai", "category": "security", "stars": 598, "score": 76, "description": "Offensive-security MCP server with 205 wrapped tools, 17 specialist agents, and 60 SPA-aware probes for OWASP Top 10. CLI + MCP, BYO LLM", "lang": "python"},
+
+    # ── Cloud / AWS Official (new) ───────────────────────────
+    {"name": "agent-toolkit-for-aws", "repo": "aws/agent-toolkit-for-aws", "category": "cloud", "stars": 803, "score": 88, "description": "Official AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS", "lang": "python"},
 ]
 
 
