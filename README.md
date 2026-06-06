@@ -4,8 +4,11 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/xlyoung/mcp-doctor?style=social)](https://github.com/xlyoung/mcp-doctor)
 [![PyPI](https://img.shields.io/pypi/v/mcp-doctor.svg)](https://pypi.org/project/mcp-doctor/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/mcp-doctor.svg)](https://pypi.org/project/mcp-doctor/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Security Scanner](https://img.shields.io/badge/security-scanner-red.svg)](https://github.com/xlyoung/mcp-doctor#-security-checks)
+[![MCP Compatible](https://img.shields.io/badge/MCP-compatible-brightgreen.svg)](https://modelcontextprotocol.io/)
 
 > The missing security and quality toolkit for the [Model Context Protocol](https://modelcontextprotocol.io/) ecosystem.
 > Scan MCP servers for vulnerabilities, score their quality, compare alternatives, and install with confidence.
