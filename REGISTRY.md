@@ -2,30 +2,30 @@
 
 A curated, scored database of Model Context Protocol (MCP) servers. Use `mcp-doctor list` to browse, or `mcp-doctor scan` to check any server before installing.
 
-> **Last updated:** 2026-06-06 | **Total servers:** 60+ | **Categories:** 17
+> **Last updated:** 2026-06-06 | **Total servers:** 70+ | **Categories:** 20
 
 ## 📊 Top Servers by Score
 
 | Server | Score | Category | Stars | Description |
 |--------|-------|----------|-------|-------------|
-| github/github-mcp-server | 97 | devops | 30.5k | GitHub's official MCP server |
 | microsoft/playwright-mcp | 96 | web | 33.6k | Official Microsoft Playwright MCP server |
+| github/github-mcp-server | 97 | devops | 30.5k | GitHub's official MCP server |
 | PrefectHQ/fastmcp | 95 | ai | 25.5k | Fast, Pythonic way to build MCP servers |
+| activepieces/activepieces | 90 | automation | 22.6k | AI workflow automation with 400+ MCP servers |
 | googleapis/mcp-toolbox | 93 | database | 15.5k | Google's MCP Toolbox for Databases |
 | GLips/Figma-Context-MCP | 93 | design | 15k | Figma layout for AI coding agents |
 | modelcontextprotocol/inspector | 92 | devtools | 10k | Official MCP inspector & debugger |
+| mcp-use/mcp-use | 89 | framework | 10.1k | Fullstack MCP framework |
 | @modelcontextprotocol/server-filesystem | 92 | filesystem | 12k | Secure file system access |
 | @modelcontextprotocol/server-github | 91 | devops | 12k | GitHub API: repos, issues, PRs |
-| @modelcontextprotocol/server-sqlite | 91 | database | 12k | SQLite with built-in analysis |
-| hangwin/mcp-chrome | 90 | web | 11.9k | Chrome extension MCP for browser automation |
 
 ## 📂 Categories
 
 ### 🗄️ Database (11 servers)
 PostgreSQL, MySQL, SQLite, Redis, MongoDB, Qdrant, ClickHouse, Elasticsearch, Supabase, Neon, Google Toolbox
 
-### 🌐 Web & Search (7 servers)
-Brave Search, Playwright, Puppeteer, Firecrawl, Fetch, Tavily, Chrome MCP
+### 🌐 Web & Search (9 servers)
+Brave Search, Playwright, Puppeteer, Firecrawl, Fetch, Tavily, Chrome MCP, BrowserMCP, bb-browser
 
 ### 🔧 DevOps & Git (8 servers)
 GitHub (official & GitHub MCP), GitLab, Docker, Kubernetes, Git, GitLab CI, XcodeBuild MCP
@@ -42,23 +42,29 @@ Notion, Obsidian, Memory, Confluence
 ### 🤖 AI / ML (5 servers)
 FastMCP, Hugging Face, Ollama, Replicate, OpenAI
 
-### 📋 Productivity (5 servers)
-Google Maps, Linear, Airtable, Google Calendar, Todoist
+### 📋 Productivity (6 servers)
+Google Maps, Linear, Airtable, Google Calendar, Todoist, Kreuzberg (document processing)
 
-### 🔒 Security (3 servers)
-Semgrep, NVD CVE, GhidraMCP
+### 🔒 Security (5 servers)
+Semgrep, NVD CVE, GhidraMCP, MCP Audit, MCPSec
 
 ### 🖥️ System & Desktop (2 servers)
 DesktopCommanderMCP, Windows-MCP
 
-### 🛠️ Developer Tools (2 servers)
-MCP Inspector, git-mcp
+### 🛠️ Developer Tools (4 servers)
+MCP Inspector, git-mcp, MCP Registry, MCP Doctor
 
 ### 🎨 Design (1 server)
 Figma Context MCP
 
-### ☁️ Cloud (2 servers)
-AWS, Everything (reference)
+### ☁️ Cloud (3 servers)
+AWS, Everything (reference), ActivePieces
+
+### 🔄 Automation (1 server)
+ActivePieces — AI workflow automation with ~400 built-in MCP servers
+
+### 🏗️ Framework (1 server)
+mcp-use — Fullstack MCP framework for ChatGPT/Claude & MCP Servers
 
 ## 🔒 Security Scoring
 

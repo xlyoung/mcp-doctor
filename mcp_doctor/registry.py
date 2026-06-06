@@ -24,7 +24,7 @@ _REGISTRY: list[dict[str, Any]] = [
     # ── Web / Search ─────────────────────────────────────────────
     {"name": "@modelcontextprotocol/server-brave-search", "repo": "modelcontextprotocol/servers", "category": "web", "stars": 12000, "score": 89, "description": "Brave Search API integration", "lang": "typescript"},
     {"name": "@modelcontextprotocol/server-fetch", "repo": "modelcontextprotocol/servers", "category": "web", "stars": 12000, "score": 87, "description": "Web content fetching and conversion", "lang": "typescript"},
-    {"name": "mcp-server-firecrawl", "repo": "firecrawl/mcp-server", "category": "web", "stars": 5000, "score": 88, "description": "Web scraping with Firecrawl", "lang": "typescript"},
+    {"name": "mcp-server-firecrawl", "repo": "firecrawl/firecrawl-mcp-server", "category": "web", "stars": 6506, "score": 88, "description": "Official Firecrawl MCP server — powerful web scraping and search for Cursor, Claude, and other LLM clients", "lang": "javascript"},
     {"name": "@modelcontextprotocol/server-puppeteer", "repo": "modelcontextprotocol/servers", "category": "web", "stars": 12000, "score": 85, "description": "Browser automation via Puppeteer", "lang": "typescript"},
     {"name": "microsoft/playwright-mcp", "repo": "microsoft/playwright-mcp", "category": "web", "stars": 33561, "score": 96, "description": "Official Microsoft Playwright MCP server for browser automation", "lang": "typescript"},
     {"name": "mcp-server-tavily", "repo": "tavily-ai/tavily-mcp", "category": "web", "stars": 500, "score": 82, "description": "Tavily AI-powered web search for agents", "lang": "typescript"},
@@ -95,6 +95,29 @@ _REGISTRY: list[dict[str, Any]] = [
     # ── Developer Tools ───────────────────────────────────────
     {"name": "mcp-inspector", "repo": "modelcontextprotocol/inspector", "category": "devtools", "stars": 10011, "score": 92, "description": "Official MCP inspector — debug and test MCP servers interactively", "lang": "typescript"},
     {"name": "git-mcp", "repo": "idosal/git-mcp", "category": "devtools", "stars": 8142, "score": 86, "description": "Instant MCP server for any GitHub repo — code search and documentation retrieval", "lang": "typescript"},
+
+    # ── Workflow / Automation ─────────────────────────────────────
+    {"name": "activepieces", "repo": "activepieces/activepieces", "category": "automation", "stars": 22585, "score": 90, "description": "AI Agents & MCP workflow automation platform with ~400 built-in MCP servers for AI agents", "lang": "typescript"},
+
+    # ── Framework ─────────────────────────────────────────────────
+    {"name": "mcp-use", "repo": "mcp-use/mcp-use", "category": "framework", "stars": 10061, "score": 89, "description": "Fullstack MCP framework to develop MCP Apps for ChatGPT/Claude and MCP Servers for AI Agents", "lang": "typescript"},
+
+    # ── Cloud / AWS ──────────────────────────────────────────────
+    {"name": "awslabs-mcp", "repo": "awslabs/mcp", "category": "cloud", "stars": 9219, "score": 88, "description": "Open source MCP servers for AWS — Lambda, S3, DynamoDB, CloudWatch, and more", "lang": "python"},
+
+    # ── Browser Automation (new) ─────────────────────────────────
+    {"name": "BrowserMCP", "repo": "BrowserMCP/mcp", "category": "web", "stars": 6630, "score": 85, "description": "Browser MCP server — allows AI applications to control your browser via the Model Context Protocol", "lang": "typescript"},
+    {"name": "bb-browser", "repo": "epiral/bb-browser", "category": "web", "stars": 5689, "score": 82, "description": "CLI + MCP server for AI agents to control Chrome with your login state — your browser is the API", "lang": "typescript"},
+
+    # ── Registry / Discovery ─────────────────────────────────────
+    {"name": "mcp-registry", "repo": "modelcontextprotocol/registry", "category": "devtools", "stars": 6894, "score": 87, "description": "Official community-driven registry service for Model Context Protocol (MCP) servers", "lang": "go"},
+
+    # ── Document Processing ──────────────────────────────────────
+    {"name": "kreuzberg", "repo": "kreuzberg-dev/kreuzberg", "category": "productivity", "stars": 8449, "score": 84, "description": "Polyglot document intelligence framework with Rust core — extract text, metadata, and structured info from 97+ formats via MCP", "lang": "rust"},
+
+    # ── Security (new) ──────────────────────────────────────────
+    {"name": "mcp-audit", "repo": "Norbi0801/mcp-audit", "category": "security", "stars": 150, "score": 75, "description": "Security auditing tool for MCP servers — 19 rules covering OWASP MCP Top 10, SARIF output for CI/CD", "lang": "rust"},
+    {"name": "mcpsec", "repo": "mcp-shark/mcpsec", "category": "security", "stars": 100, "score": 72, "description": "MCP server compliance scanner — validates against MCP spec, OWASP Top 10, and FastMCP baseline", "lang": "python"},
 ]
 
 
