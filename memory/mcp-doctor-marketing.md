@@ -1,32 +1,39 @@
 # MCP Doctor Marketing Notes
 
-## Last run: 2026-06-07 01:00 (UTC+8)
+## Last run: 2026-06-07 04:15 (UTC+8)
 
 ## Current Status
 - Stars: 0
 - Forks: 0
 - Open issues: 0
 - Last push: 2026-06-07
-- Registry: 85+ servers (up from 70+)
+- Registry: 91+ servers (up from 85+)
+- Security checks: 6 categories (added SSRF, command injection)
 
-## Completed Actions
+## Completed Actions (this run)
+- [x] Added `mcp-doctor audit` command — CI/CD-friendly with exit codes, --json, --threshold
+- [x] Added SSRF detection to scanner (cloud metadata, localhost, dynamic URLs)
+- [x] Added command injection detection (os.system, subprocess shell=True, exec, child_process)
+- [x] Added 5 new high-star servers to registry:
+  - chrome-devtools-mcp (43K★) — Official Chrome DevTools
+  - n8n-mcp (21K★) — Build n8n workflows
+  - headroom (15K★) — Token compression
+  - xiaohongshu-mcp (14K★) — China's lifestyle platform
+  - fastapi-mcp (11K★) — FastAPI to MCP bridge
+- [x] Updated REGISTRY.md with new top servers and category counts
+- [x] Community outreach: Commented on PrefectHQ/fastmcp#4244 (audit hooks proposal, 25K★ repo)
+- [x] Community outreach: Commented on AIAnytime/Awesome-MCP-Server#35 (SSRF vulnerability)
+- [x] Updated README with audit command examples and CI/CD comparison row
+
+## Previous Actions (still active)
 - [x] Submitted PR/issue to punkpeye/awesome-mcp-servers (issue #7489) — waiting for merge
-- [x] Expanded registry from 60 → 70+ → 85+ servers (added 15 new entries this run)
-- [x] Improved README with competitive comparison table
-- [x] Added SEO keywords: SSRF, command injection, CI/CD, OWASP
-- [x] Submitted to mcpso (chatmcp/mcpso#1) — https://github.com/chatmcp/mcpso/issues/1#issuecomment-4639924925
+- [x] Submitted to mcpso (chatmcp/mcpso#1)
 - [x] Added GitHub Actions CI workflow (ci.yml)
 - [x] Added reusable MCP scan action (mcp-scan-action.yml)
-- [x] Fixed pre-existing test_search_by_category bug
 
-## New Registry Entries (this run)
-High-star servers added:
-- MindsDB (39K★), Serena (25K★), Blender MCP (22K★)
-- Pipedream (11K★), CodeGraphContext (3.6K★), codebase-memory (3K★)
-- MetaMCP (2.4K★), Terminator (1.5K★), DaVinci Resolve (1.2K★)
-- Microsoft MCP Gateway (670★), oxvault scanner
-
-New categories: coding agents, art/creative, aggregators, desktop automation
+## Registry Growth
+- Started: 60 servers → 70+ → 85+ → now 91+ servers
+- 20+ categories including: web, database, devops, ai, automation, framework, security, design
 
 ## Competing Tools (MCP Security Space)
 - **mcp-audit** (Norbi0801) — Rust, 19 rules, AGPL-3.0, OWASP MCP Top 10
@@ -41,9 +48,10 @@ New categories: coding agents, art/creative, aggregators, desktop automation
 - **jsandov/mcp-audit** — Python, 7 categories, attack graph dashboard
 
 ## MCP Doctor's Unique Position
-- **Only tool** combining: security scan + quality scoring + registry + comparison + install
+- **Only tool** combining: security scan + quality scoring + registry + comparison + install + CI/CD audit
 - Competitors focus on security scanning only
 - MCP Doctor is a **complete MCP server toolkit**
+- New `audit` command makes it CI/CD pipeline-ready with exit codes
 
 ## Key Directories & Listings
 - [ ] punkpeye/awesome-mcp-servers — issue #7489 (pending)
@@ -53,11 +61,11 @@ New categories: coding agents, art/creative, aggregators, desktop automation
 - [ ] explainx.ai leaderboard — not yet submitted
 - [ ] mcpmarket.com — not yet submitted
 
-## Relevant Discussions Found
+## Community Outreach Log
+- PrefectHQ/fastmcp#4244 — Commented on audit hooks proposal (25K★ repo)
+- AIAnytime/Awesome-MCP-Server#35 — Commented on SSRF vulnerability
 - chatmcp/mcpso#1 — Submitted MCP Doctor entry
 - punkpeye/awesome-mcp-servers#7489 — Submitted entry request (pending)
-- cfgaudit/cfgaudit#248 — MCP server support (could mention mcp-doctor)
-- Various CVE/security issues in MCP ecosystem
 
 ## MCP Ecosystem Context (June 2026)
 - MCP has ~97M monthly SDK downloads
@@ -72,12 +80,13 @@ New categories: coding agents, art/creative, aggregators, desktop automation
 2. Submit to glama.ai, mcpmarket.com, explainx.ai directories
 3. Find 2-3 more relevant GitHub issues to recommend MCP Doctor naturally
 4. Search Reddit/HN/V2EX for MCP security discussions (Strategy D)
-5. Consider adding more scanner checks (SSRF, command injection patterns)
-6. Add GitHub Actions workflow for CI/CD integration ✓ (done this run)
-7. Consider adding a `mcp-doctor report` command that generates shareable HTML reports
+5. Add more scanner checks (supply chain, dependency analysis)
+6. Consider adding `mcp-doctor report` command for shareable HTML reports
+7. Add GitHub topic tags: `mcp`, `security`, `scanner`, `audit`, `model-context-protocol`
 
 ## Key Messaging
 - "Before installing an MCP server, run it through the Doctor"
 - Position as the "npm meets security audit" for MCP ecosystem
-- Emphasize: scan + score + compare + install in one CLI
-- "85+ curated servers with security scores"
+- Emphasize: scan + score + compare + install + audit in one CLI
+- "91+ curated servers with security scores"
+- NEW: "CI/CD-ready with exit codes — gate your MCP deployments"
