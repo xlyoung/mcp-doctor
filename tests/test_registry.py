@@ -10,7 +10,11 @@ def test_registry_not_empty():
 def test_search_by_category():
     results = search_servers("database")
     assert len(results) > 0
-    assert all("database" in r.get("category", "") for r in results)
+    # search matches name, description, OR category — all results should match at least one
+    for r in results:
+        assert ("database" in r.get("category", "")
+                or "database" in r.get("name", "").lower()
+                or "database" in r.get("description", "").lower())
 
 
 def test_search_by_name():

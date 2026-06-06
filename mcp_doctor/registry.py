@@ -118,6 +118,27 @@ _REGISTRY: list[dict[str, Any]] = [
     # ── Security (new) ──────────────────────────────────────────
     {"name": "mcp-audit", "repo": "Norbi0801/mcp-audit", "category": "security", "stars": 150, "score": 75, "description": "Security auditing tool for MCP servers — 19 rules covering OWASP MCP Top 10, SARIF output for CI/CD", "lang": "rust"},
     {"name": "mcpsec", "repo": "mcp-shark/mcpsec", "category": "security", "stars": 100, "score": 72, "description": "MCP server compliance scanner — validates against MCP spec, OWASP Top 10, and FastMCP baseline", "lang": "python"},
+    {"name": "oxvault-scanner", "repo": "oxvault/scanner", "category": "security", "stars": 3, "score": 70, "description": "Go-based MCP security scanner — 12/12 CVE detection, SSRF/path traversal/rug pull checks, zero dependencies", "lang": "go"},
+
+    # ── Coding Agents (new) ────────────────────────────────────
+    {"name": "serena", "repo": "oraios/serena", "category": "ai", "stars": 25001, "score": 95, "description": "Fully-featured coding agent using language servers for symbolic code operations — the IDE for your agent", "lang": "python"},
+    {"name": "codebase-memory-mcp", "repo": "deusdata/codebase-memory-mcp", "category": "devtools", "stars": 3008, "score": 86, "description": "High-performance code intelligence MCP server — indexes codebases into a persistent knowledge graph, 159 languages, sub-ms queries", "lang": "c"},
+    {"name": "CodeGraphContext", "repo": "CodeGraphContext/CodeGraphContext", "category": "devtools", "stars": 3624, "score": 85, "description": "MCP server that indexes local code into a graph database to provide context to AI assistants with graphical code exploration", "lang": "python"},
+
+    # ── Art / Creative (new) ──────────────────────────────────
+    {"name": "blender-mcp", "repo": "ahujasid/blender-mcp", "category": "design", "stars": 22395, "score": 90, "description": "MCP server for working with Blender — 3D modeling, rendering, and scene manipulation via AI", "lang": "python"},
+    {"name": "davinci-resolve-mcp", "repo": "samuelgursky/davinci-resolve-mcp", "category": "design", "stars": 1186, "score": 82, "description": "MCP server integration for DaVinci Resolve Studio — video editing, color grading, and media management", "lang": "python"},
+
+    # ── Aggregators / Middleware (new) ─────────────────────────
+    {"name": "metamcp", "repo": "metatool-ai/metamcp", "category": "devtools", "stars": 2382, "score": 82, "description": "Unified middleware MCP server that manages your MCP connections with GUI — aggregator, orchestrator, and gateway", "lang": "typescript"},
+    {"name": "mcp-gateway", "repo": "microsoft/mcp-gateway", "category": "devtools", "stars": 670, "score": 85, "description": "Microsoft's MCP Gateway — reverse proxy and management layer for MCP servers with session-aware routing in Kubernetes", "lang": "typescript"},
+
+    # ── Automation / Integration (new) ────────────────────────
+    {"name": "pipedream-mcp", "repo": "PipedreamHQ/pipedream", "category": "automation", "stars": 11440, "score": 88, "description": "Connect 2,500+ APIs with 8,000+ prebuilt tools and manage MCP servers for your users", "lang": "typescript"},
+    {"name": "mindsdb-mcp", "repo": "mindsdb/mindsdb", "category": "database", "stars": 39253, "score": 92, "description": "Connect and unify data across various platforms and databases with MindsDB as a single MCP server", "lang": "python"},
+
+    # ── Desktop Automation (new) ──────────────────────────────
+    {"name": "terminator", "repo": "mediar-ai/terminator", "category": "system", "stars": 1518, "score": 80, "description": "Desktop GUI automation using accessibility APIs — control Windows, macOS, and Linux apps without vision models", "lang": "rust"},
 ]
 
 
