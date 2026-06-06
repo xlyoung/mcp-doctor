@@ -139,6 +139,21 @@ _REGISTRY: list[dict[str, Any]] = [
 
     # ── Desktop Automation (new) ──────────────────────────────
     {"name": "terminator", "repo": "mediar-ai/terminator", "category": "system", "stars": 1518, "score": 80, "description": "Desktop GUI automation using accessibility APIs — control Windows, macOS, and Linux apps without vision models", "lang": "rust"},
+
+    # ── Web / Browser DevTools (new) ─────────────────────────
+    {"name": "chrome-devtools-mcp", "repo": "ChromeDevTools/chrome-devtools-mcp", "category": "web", "stars": 42991, "score": 97, "description": "Official Chrome DevTools MCP server for coding agents — inspect, debug, and automate Chrome from your AI assistant", "lang": "typescript"},
+
+    # ── Workflow / n8n (new) ─────────────────────────────────
+    {"name": "n8n-mcp", "repo": "czlonkowski/n8n-mcp", "category": "automation", "stars": 21580, "score": 90, "description": "MCP server for Claude Desktop / Cursor / Windsurf to build n8n workflows — 500+ node types, workflow CRUD, AI-assisted automation", "lang": "typescript"},
+
+    # ── Token Optimization (new) ────────────────────────────
+    {"name": "headroom", "repo": "chopratejas/headroom", "category": "ai", "stars": 15690, "score": 88, "description": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM — 60-95% fewer tokens, same answers", "lang": "python"},
+
+    # ── Social Media (new) ──────────────────────────────────
+    {"name": "xiaohongshu-mcp", "repo": "xpzouying/xiaohongshu-mcp", "category": "web", "stars": 14014, "score": 85, "description": "MCP server for Xiaohongshu (Little Red Book) — search, browse, and interact with China's largest lifestyle platform", "lang": "python"},
+
+    # ── Framework / FastAPI (new) ───────────────────────────
+    {"name": "fastapi-mcp", "repo": "tadata-org/fastapi_mcp", "category": "framework", "stars": 11897, "score": 89, "description": "Expose FastAPI endpoints as MCP tools with automatic schema generation and OAuth support", "lang": "python"},
 ]
 
 
