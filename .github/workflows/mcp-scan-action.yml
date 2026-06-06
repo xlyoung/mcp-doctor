@@ -1,0 +1,41 @@
+name: MCP Server Scan
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      server_ref:
+        description: "MCP server to scan (GitHub ref or npm package)"
+        required: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MCP Doctor
+        run: pip install mcp-doctor
+
+      - name: Scan MCP server
+        run: |
+          SERVER="${{ github.event.inputs.server_ref || '' }}"
+          if [ -z "$SERVER" ]; then
+            echo "No server specified, scanning repo..."
+            REPO="${{ github.repository }}"
+            mcp-doctor scan "$REPO" || true
+          else
+            mcp-doctor scan "$SERVER" || true
+          fi
+
+      - name: Score MCP server
+        if: github.event.inputs.server_ref != ''
+        run: mcp-doctor score "${{ github.event.inputs.server_ref }}" || true
