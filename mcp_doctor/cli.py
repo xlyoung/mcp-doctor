@@ -1,6 +1,7 @@
 """MCP Doctor CLI — Scan, Score, Install MCP Servers."""
 import sys
 import click
+import json
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
@@ -24,7 +25,6 @@ def main():
 @click.option("--json", "as_json", is_flag=True, help="Output as JSON")
 def scan(server: str, as_json: bool):
     """Scan an MCP server for security vulnerabilities."""
-    import json
     result = scan_server(server)
     if as_json:
         click.echo(json.dumps(result, indent=2))
@@ -36,8 +36,7 @@ def scan(server: str, as_json: bool):
 @click.argument("server")
 @click.option("--json", "as_json", is_flag=True, help="Output as JSON")
 def score(server: str, as_json: bool):
-    """Score an MCP server\u2019s quality (0-100)."""
-    import json
+    """Score an MCP server's quality (0-100)."""
     result = score_server(server)
     if as_json:
         click.echo(json.dumps(result, indent=2))
@@ -73,7 +72,8 @@ def search(query: str):
 
 @main.command()
 @click.argument("server")
-def install(server: str):
+@click.option("--force", is_flag=True, help="Skip critical issue check")
+def install(server: str, force: bool):
     """Scan + score + install an MCP server."""
     console.print(f"\n[bold]Running pre-install checks for:[/bold] {server}\n")
 
@@ -82,7 +82,7 @@ def install(server: str):
     scan_result = scan_server(server)
     _render_scan(scan_result)
 
-    if scan_result.get("critical", 0) > 0:
+    if scan_result.get("critical", 0) > 0 and not force:
         console.print("\n[red bold]\u2716 CRITICAL issues found. Install blocked.[/red bold]")
         console.print("[dim]Use --force to override (not recommended)[/dim]")
         sys.exit(1)
@@ -99,6 +99,96 @@ def install(server: str):
     console.print(f"\n[green]\u2714 {server} passed pre-install checks[/green]")
     console.print(f"[dim]Add to your MCP config manually or run:[/dim]")
     console.print(f"  [bold]claude mcp add {server}[/bold]")
+
+
+@main.command()
+@click.argument("server_a")
+@click.argument("server_b")
+@click.option("--json", "as_json", is_flag=True, help="Output as JSON")
+def compare(server_a: str, server_b: str, as_json: bool):
+    """Compare two MCP servers side-by-side."""
+    console.print(f"\n[bold]Comparing:[/bold] {server_a} vs {server_b}\n")
+
+    score_a = score_server(server_a)
+    score_b = score_server(server_b)
+    scan_a = scan_server(server_a)
+    scan_b = scan_server(server_b)
+
+    if as_json:
+        click.echo(json.dumps({
+            "server_a": {"name": server_a, "score": score_a, "scan": scan_a},
+            "server_b": {"name": server_b, "score": score_b, "scan": scan_b},
+        }, indent=2))
+        return
+
+    # Side-by-side comparison table
+    table = Table(show_header=True, header_style="bold magenta", title="MCP Server Comparison")
+    table.add_column("Metric", style="bold", width=20)
+    table.add_column(server_a, justify="center", width=20)
+    table.add_column(server_b, justify="center", width=20)
+    table.add_column("Winner", justify="center", width=12)
+
+    # Overall score
+    ta, tb = score_a.get("total", 0), score_b.get("total", 0)
+    winner = "\u2b50" if ta > tb else "\u2b50" if tb > ta else "\u2796"
+    table.add_row(
+        "Overall Score",
+        f"[{'green' if ta>=70 else 'yellow' if ta>=40 else 'red'}]{ta}/100[/{'green' if ta>=70 else 'yellow' if ta>=40 else 'red'}]",
+        f"[{'green' if tb>=70 else 'yellow' if tb>=40 else 'red'}]{tb}/100[/{'green' if tb>=70 else 'yellow' if tb>=40 else 'red'}]",
+        server_a if ta > tb else server_b if tb > ta else "Tie",
+    )
+
+    # Category scores
+    cats_a = score_a.get("categories", {})
+    cats_b = score_b.get("categories", {})
+    for cat in ["Security", "Maintenance", "Documentation", "Testing", "Community"]:
+        sa = cats_a.get(cat, {}).get("score", 0)
+        sb = cats_b.get(cat, {}).get("score", 0)
+        table.add_row(
+            cat,
+            str(sa),
+            str(sb),
+            server_a if sa > sb else server_b if sb > sa else "Tie",
+        )
+
+    # Security issues
+    ia, ib = len(scan_a.get("issues", [])), len(scan_b.get("issues", []))
+    table.add_row(
+        "Security Issues",
+        f"[red]{ia}[/red]" if ia > 0 else "[green]0[/green]",
+        f"[red]{ib}[/red]" if ib > 0 else "[green]0[/green]",
+        server_a if ia < ib else server_b if ib < ia else "Tie",
+    )
+
+    console.print(table)
+
+    # Recommendation
+    if ta > tb + 10:
+        console.print(f"\n[green]\u2714 Recommendation: {server_a}[/green] (score {ta} vs {tb})")
+    elif tb > ta + 10:
+        console.print(f"\n[green]\u2714 Recommendation: {server_b}[/green] (score {tb} vs {ta})")
+    else:
+        console.print(f"\n[yellow]\u26a0 Both servers are comparable. Choose based on your specific needs.[/yellow]")
+
+
+@main.command(name="stats")
+def stats_cmd():
+    """Show registry statistics."""
+    registry = get_registry()
+    categories = {}
+    for s in registry:
+        cat = s.get("category", "other")
+        categories[cat] = categories.get(cat, 0) + 1
+
+    console.print(Panel.fit(
+        f"[bold]MCP Doctor Registry[/bold]\n\n"
+        f"  Total servers: [cyan]{len(registry)}[/cyan]\n"
+        f"  Categories: [cyan]{len(categories)}[/cyan]\n"
+        f"  Avg score: [cyan]{sum(s.get('score', 0) for s in registry) / max(len(registry), 1):.0f}[/cyan]\n\n"
+        + "\n".join(f"  {cat:20s} [dim]{count} servers[/dim]" for cat, count in sorted(categories.items())),
+        title="Registry Stats",
+        border_style="cyan",
+    ))
 
 
 def _render_scan(result: dict):
