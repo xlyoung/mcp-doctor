@@ -28,20 +28,35 @@ The MCP ecosystem is exploding — hundreds of servers, but no way to know which
 
 **Before installing an MCP server, run it through the Doctor.**
 
+### The MCP Security Crisis
+
+In the first 6 months of 2026, security researchers filed **30+ CVEs** targeting MCP servers, clients, and infrastructure:
+
+- **CVE-2026-44717** — `eval()` RCE in mcp_calculate_server (CVSS 9.8)
+- **CVE-2026-49257** — Default no-auth + 0.0.0.0 binding in mcp-pinot (CVSS 10.0)
+- **CVE-2026-46519** — Access control bypass in mcp-server-kubernetes (presentation-layer only filtering)
+- **CVE-2026-32814** — MCP SDK authentication bypass, 3 Indian AI startups compromised
+- **CVE-2026-25536** — Concurrent session data leakage in mcp-handler (Vercel)
+
+A study of 39,884 open-source MCP servers found **106 zero-day vulnerabilities**. OX Security found that **82% of MCP implementations** have path traversal vulnerabilities.
+
+**MCP Doctor catches these before you deploy them.**
+
 ### MCP Doctor vs Other Tools
 
-| Feature | MCP Doctor | mcp-audit | mcpaudit | MCPSec |
-|---------|-----------|-----------|----------|--------|
-| Security scanning | ✅ | ✅ | ✅ | ✅ |
-| Quality scoring (0-100) | ✅ | ❌ | ❌ | ❌ |
-| Server comparison | ✅ | ❌ | ❌ | ❌ |
-| Curated registry (95+) | ✅ | ❌ | ❌ | ❌ |
-| One-command install | ✅ | ❌ | ❌ | ❌ |
-| Categories & browsing | ✅ | ❌ | ❌ | ❌ |
-| CI/CD integration | ✅ | ✅ | ❌ | ✅ |
-| CI/CD audit (exit codes) | ✅ | ❌ | ❌ | ❌ |
+| Feature | MCP Doctor | mcp-scan | mcp-shield | mcpsec | Bawbel | mcp-fence |
+|---------|:----------:|:--------:|:----------:|:------:|:------:|:---------:|
+| Security scanning | ✅ 10 engines | ✅ | ✅ 20 rules | ✅ fuzzer | ✅ 6 engines | ✅ proxy |
+| Quality scoring (0-100) | ✅ | ❌ | ✅ (A-F) | ❌ | ❌ | ❌ |
+| Curated registry (100+) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Server comparison | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| One-command install | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| CI/CD integration | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Response-side scanning | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Local / no API dependency | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Categories & browsing | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
-MCP Doctor is the only tool that combines **security scanning**, **quality scoring**, **server comparison**, and a **curated registry** into a single CLI.
+MCP Doctor is the only tool that combines **security scanning**, **quality scoring**, **server comparison**, and a **curated registry** into a single CLI. Other tools excel in specific areas — mcp-fence for response-side scanning, mcpsec for protocol fuzzing, Bawbel for multi-engine analysis — but none offer the full pre-installation workflow.
 
 ## ✨ Features
 
