@@ -6,14 +6,11 @@ on:
 
 permissions:
   id-token: write  # Required for trusted publishing
+  contents: read
 
 jobs:
-  publish:
-    name: Publish to PyPI
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/project/mcpdoctor/
     steps:
       - uses: actions/checkout@v4
 
@@ -27,6 +24,25 @@ jobs:
 
       - name: Build package
         run: python -m build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write  # Required for trusted publishing
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
