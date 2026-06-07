@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mcpdoctor"
-version = "0.1.0"
+version = "0.1.1"
 description = "Scan, score, and install MCP servers with confidence"
 readme = "README.md"
 license = {text = "MIT"}
