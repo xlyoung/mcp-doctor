@@ -13,6 +13,12 @@
 > The missing security and quality toolkit for the [Model Context Protocol](https://modelcontextprotocol.io/) ecosystem.
 > Scan MCP servers for vulnerabilities, score their quality, compare alternatives, and install with confidence.
 
+### By the Numbers
+
+| 📦 Registry | 🔒 Security Checks | 📊 Quality Dimensions |
+|:-----------:|:-------------------:|:--------------------:|
+| **100+** servers scored | **10** detection engines | **5** scoring categories |
+
 ---
 
 ## 🤔 Why MCP Doctor?
@@ -73,6 +79,31 @@ mcp-doctor audit @modelcontextprotocol/server-filesystem --json  # machine-reada
 
 # View registry stats
 mcp-doctor stats
+```
+
+## 🔬 Demo: Scan in Action
+
+```
+$ mcp-doctor scan @modelcontextprotocol/server-filesystem
+
+🩺 MCP Doctor — Security Scan
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Target: @modelcontextprotocol/server-filesystem
+
+🔒 Security Issues Found: 3
+   ├── 🟠 MEDIUM  Unconstrained Parameters
+   │   └── 6 string params lack maxLength/pattern constraints
+   │       → path (read_file, write_file, edit_file, ...)
+   ├── 🟡 LOW     Excessive Permissions
+   │   └── Configurable access control but no default restrictions
+   └── 🟡 LOW     No Input Sanitization
+       └── Path parameters accept ../ traversal sequences
+
+⚠️  Security Score: 72/100 (Fair)
+
+Use --json for machine-readable output
+Use --threshold 80 to enforce minimum score in CI/CD
 ```
 
 ## 📊 Quality Score Breakdown
