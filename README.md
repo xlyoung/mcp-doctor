@@ -3,8 +3,8 @@
 **Scan · Score · Install — Your MCP Server Toolkit**
 
 [![GitHub Stars](https://img.shields.io/github/stars/xlyoung/mcp-doctor?style=social)](https://github.com/xlyoung/mcp-doctor)
-[![PyPI](https://img.shields.io/pypi/v/mcp-doctor.svg)](https://pypi.org/project/mcp-doctor/)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/mcp-doctor.svg)](https://pypi.org/project/mcp-doctor/)
+[![PyPI](https://img.shields.io/pypi/v/mcpdoctor.svg)](https://pypi.org/project/mcpdoctor/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/mcpdoctor.svg)](https://pypi.org/project/mcpdoctor/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Security Scanner](https://img.shields.io/badge/security-scanner-red.svg)](https://github.com/xlyoung/mcp-doctor#-security-checks)
@@ -50,7 +50,7 @@ MCP Doctor is the only tool that combines **security scanning**, **quality scori
 
 ```bash
 # Install
-pip install mcp-doctor
+pip install mcpdoctor
 
 # Scan an MCP server for security issues
 mcp-doctor scan @modelcontextprotocol/server-filesystem
