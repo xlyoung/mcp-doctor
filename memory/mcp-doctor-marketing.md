@@ -1,84 +1,74 @@
 # MCP Doctor Marketing Notes
 
-## Last run: 2026-06-07 10:00 (UTC+8)
+## Last run: 2026-06-07 06:15 (UTC+8)
 
 ## Current Status
 - Stars: 0
 - Forks: 0
 - Open issues: 0
 - Last push: 2026-06-07
-- Registry: 97+ servers (up from 91+)
-- Security checks: 8 categories (added unconstrained params, tool access control bypass)
+- Registry: 100+ servers (up from 95+)
+- Security checks: 8 categories (prompt injection, path traversal, credential leakage, network exfiltration, SSRF, command injection, supply chain, excessive permissions)
 
 ## Completed Actions (this run)
-- [x] **Strategy A — New scanner checks:**
-  - `_check_unconstrained_params`: detects string params without maxLength/pattern/enum constraints (ref: modelcontextprotocol/servers#3537)
-  - `_check_tool_access_control`: detects presentation-layer-only filtering bypass (ref: CVE-2026-46519 in mcp-server-kubernetes)
-  - All 7 tests pass
-- [x] **Strategy B — Registry expansion (91+ → 97+):**
-  - design-extract (3K★) — website design system extraction
-  - anysearch-mcp-server (1K★) — unified search for AI agents
-  - cve-mcp-server (952★) — CVE/security intelligence (27 tools, 21 APIs)
-  - agent-toolkit-for-aws (803★) — official AWS MCP toolkit
-  - stash (710★) — persistent memory layer for AI agents
-  - pentest-ai (598★) — offensive security with 205 tools
-- [x] **Strategy C — Community outreach:**
-  - Commented on modelcontextprotocol/servers#4143 (SSRF protection, cloud metadata exfiltration) — naturally recommended MCP Doctor's SSRF detection
-  - Commented on modelcontextprotocol/servers#3537 (unconstrained string parameters) — referenced new scanner check
-- [x] **Strategy D — Ecosystem research:**
-  - Found HN thread #47356600 "MCP Security 2026: 30 CVEs in 60 Days" — active discussion
-  - Found HN thread #47692889 "Show HN: MCP-fence" — MCP firewall, complementary to MCP Doctor
-  - Found HN thread #47367404 "Show HN: MCPS" — cryptographic identity for MCP agents
-  - Found HN thread #47138022 "We audited both MCP SDKs" — boundary-crossing vulnerabilities
-- [x] Updated README security checks section
+- [x] Added 2 new high-star servers to registry:
+  - pal-mcp-server (11.6K★) — Multi-model MCP aggregator
+  - hexstrike-ai (9.4K★) — 150+ cybersecurity pentesting tools
+- [x] Resolved merge conflicts and pushed changes
+- [x] Community outreach: Submitted to 3 new awesome lists:
+  - yzfly/Awesome-MCP-ZH#268 (7.2K★ list, Chinese MCP directory)
+  - YuzeHao2023/Awesome-MCP-Servers#301 (1K★ list)
+  - TensorBlock/awesome-mcp-servers#668 (728★ list)
+  - MobinX/awesome-mcp-list#303 (878★ list)
+- [x] Researched competitive landscape (MCPScan, mcpaudit, jsandov/mcp-audit, sahiloj/MCPScan)
+- [x] Verified HN discussion about MCP-Scanner (Cisco) — noted MCP Doctor's differentiator
 
 ## Previous Actions (still active)
 - [x] Submitted PR/issue to punkpeye/awesome-mcp-servers (issue #7489) — waiting for merge
 - [x] Submitted to mcpso (chatmcp/mcpso#1)
+- [x] Submitted to Puliczek/awesome-mcp-security (issue #185) — waiting for merge
 - [x] Added GitHub Actions CI workflow (ci.yml)
 - [x] Added reusable MCP scan action (mcp-scan-action.yml)
+- [x] Community outreach: PrefectHQ/fastmcp#4244, AIAnytime/Awesome-MCP-Server#35
 
 ## Registry Growth
-- Started: 60 servers → 70+ → 85+ → 91+ → now 97+ servers
-- 20+ categories including: web, database, devops, ai, automation, framework, security, design
+- Started: 60 servers → 70+ → 85+ → 91+ → 95+ → now 100+ servers
+- 22+ categories including: web, database, devops, ai, automation, framework, security, design, pentesting, aggregators
 
 ## Competing Tools (MCP Security Space)
-- **mcp-shield** (GaboITB) — Python, 17 detectors, Docker sandbox, zero deps (NEW competitor)
-- **velox-mcp-audit** (veloxlabsio) — Python, 6 checks, AST scanning, early alpha (NEW competitor)
-- **mcpaudit** (piiiico) — npm/npx, static scanner, multi-language
-- **MCPScan** (sahiloj) — Node, 8 check categories, offensive auditor (NEW competitor)
-- **mcp-audit** (jsandov) — Python, 7 categories, attack graph dashboard
-- **mcp-audit** (Norbi0801) — Rust, 19 rules, AGPL-3.0, OWASP MCP Top 10
-- **MCPSec** (mcp-shark) — Compliance scanner, MCP spec + OWASP
+- **MCPScan (sahiloj)** — TypeScript, 8 check categories, offensive security, MITRE ATT&CK
+- **mcp-audit (Norbi0801)** — Rust, 19 rules, AGPL-3.0, OWASP MCP Top 10
+- **mcpaudit (piiiico)** — npm/npx, static scanner, multi-language, 14 patterns
+- **MCPSec (mcp-shark)** — Compliance scanner, MCP spec + OWASP
+- **mcp-shield (GaboITB)** — Python, 17 detectors, Docker sandbox
+- **mcpscan (obielin)** — Python, 8 rules, zero deps
+- **mcp-security-scanner (TreRB)** — Node, 8 checks, static audit
+- **mcp-security-scan (agentgraph-co)** — npm, static + dynamic, trust scores
+- **mcp-security-auditor (prabhubng)** — npm, 7 analyzers
 - **oxvault/scanner** — Go, 12/12 CVE detection, zero deps
+- **jsandov/mcp-audit** — Python, 7 categories, attack graph dashboard
+- **kryptonomeai-cloud/mcpscan** — Python, 10 modules, 40+ rules
 
 ## MCP Doctor's Unique Position
 - **Only tool** combining: security scan + quality scoring + registry + comparison + install + CI/CD audit
 - Competitors focus on security scanning only
 - MCP Doctor is a **complete MCP server toolkit**
-- New checks (unconstrained params, tool access control) directly address community-reported issues
+- `audit` command makes it CI/CD pipeline-ready with exit codes
+- 100+ curated servers with quality scores — no competitor has this
 
 ## Key Directories & Listings
 - [ ] punkpeye/awesome-mcp-servers — issue #7489 (pending)
 - [x] chatmcp/mcpso — issue #1 comment submitted
+- [x] Puliczek/awesome-mcp-security — issue #185 (pending)
+- [x] yzfly/Awesome-MCP-ZH — issue #268 (submitted)
+- [x] YuzeHao2023/Awesome-MCP-Servers — issue #301 (submitted)
+- [x] TensorBlock/awesome-mcp-servers — issue #668 (submitted)
+- [x] MobinX/awesome-mcp-list — issue #303 (submitted)
 - [ ] glama.ai/mcp/servers — not yet submitted
 - [ ] Docker MCP Catalog — not yet submitted
 - [ ] explainx.ai leaderboard — not yet submitted
 - [ ] mcpmarket.com — not yet submitted
-
-## Community Outreach Log
-- PrefectHQ/fastmcp#4244 — Commented on audit hooks proposal (25K★ repo)
-- AIAnytime/Awesome-MCP-Server#35 — Commented on SSRF vulnerability
-- chatmcp/mcpso#1 — Submitted MCP Doctor entry
-- punkpeye/awesome-mcp-servers#7489 — Submitted entry request (pending)
-- **modelcontextprotocol/servers#4143** — Commented on SSRF protection (NEW)
-- **modelcontextprotocol/servers#3537** — Commented on unconstrained string parameters (NEW)
-
-## HN Discussions Worth Monitoring
-- #47356600 — "MCP Security 2026: 30 CVEs in 60 Days" (active, security-focused)
-- #47692889 — "Show HN: MCP-fence" (MCP firewall, complementary tool)
-- #47367404 — "Show HN: MCPS" (cryptographic identity layer)
-- #47138022 — "We audited both MCP SDKs" (boundary-crossing vulns)
+- [ ] GitHub Actions Marketplace — not yet submitted
 
 ## MCP Ecosystem Context (June 2026)
 - MCP has ~97M monthly SDK downloads
@@ -87,21 +77,22 @@
 - 30+ MCP-related CVEs filed in H1 2026
 - Major adoption: Claude, ChatGPT, Gemini, VS Code, Cursor
 - Enterprise readiness is top priority in 2026 roadmap
-- New competitors emerging weekly — differentiation through completeness is key
+- HN discussion: MCP-Scanner (Cisco) vs Invariant Labs mcp-scan — toxic flow analysis
 
 ## Next Steps
-1. Monitor awesome-mcp-servers issue #7489 for merge
+1. Monitor all submitted issues for merge/acceptance
 2. Submit to glama.ai, mcpmarket.com, explainx.ai directories
-3. Add `mcp-doctor report` command for shareable HTML reports
-4. Consider adding dependency CVE scanning to scanner
-5. Search V2EX/Reddit for Chinese-language MCP discussions (xiaohongshu-mcp angle)
-6. Add more scanner checks (OAuth conformance, transport security)
-7. Consider "MCP Doctor Verified" badge for well-scored servers
+3. Submit MCP Doctor GitHub Action to Actions Marketplace
+4. Add `mcp-doctor report` command for shareable HTML reports
+5. Consider adding "toxic flow" detection (cross-server analysis) — differentiator vs competitors
+6. Search Reddit/V2EX for MCP security discussions (Strategy D)
+7. Find 2-3 more relevant GitHub issues to recommend MCP Doctor naturally
+8. Add more scanner checks (supply chain, dependency analysis)
 
 ## Key Messaging
 - "Before installing an MCP server, run it through the Doctor"
 - Position as the "npm meets security audit" for MCP ecosystem
 - Emphasize: scan + score + compare + install + audit in one CLI
-- "97+ curated servers with security scores"
-- NEW: "Detects unconstrained parameters and tool access control bypasses"
-- NEW: "CI/CD-ready with exit codes — gate your MCP deployments"
+- "100+ curated servers with security scores"
+- "CI/CD-ready with exit codes — gate your MCP deployments"
+- "Unlike security-only scanners, MCP Doctor gives you the full picture: security + quality + registry"
