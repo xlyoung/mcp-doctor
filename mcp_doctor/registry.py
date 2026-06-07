@@ -172,6 +172,12 @@ _REGISTRY: list[dict[str, Any]] = [
 
     # ── Cloud / AWS Official (new) ───────────────────────────
     {"name": "agent-toolkit-for-aws", "repo": "aws/agent-toolkit-for-aws", "category": "cloud", "stars": 803, "score": 88, "description": "Official AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS", "lang": "python"},
+
+    # ── Multi-Model Aggregators (new) ──────────────────────────
+    {"name": "pal-mcp-server", "repo": "BeehiveInnovations/pal-mcp-server", "category": "ai", "stars": 11588, "score": 87, "description": "Multi-model MCP aggregator — Claude Code, GeminiCLI, CodexCLI + Gemini/OpenAI/OpenRouter/Azure/Grok/Ollama working as one", "lang": "python"},
+
+    # ── Cybersecurity / Pentesting (new) ──────────────────────
+    {"name": "hexstrike-ai", "repo": "0x4m4/hexstrike-ai", "category": "security", "stars": 9376, "score": 80, "description": "HexStrike AI MCP Agents — 150+ cybersecurity tools for automated pentesting, vulnerability discovery, and bug bounty automation", "lang": "python"},
 ]
 
 

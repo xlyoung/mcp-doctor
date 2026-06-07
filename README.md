@@ -28,7 +28,7 @@ The MCP ecosystem is exploding — hundreds of servers, but no way to know which
 | Security scanning | ✅ | ✅ | ✅ | ✅ |
 | Quality scoring (0-100) | ✅ | ❌ | ❌ | ❌ |
 | Server comparison | ✅ | ❌ | ❌ | ❌ |
-| Curated registry (91+) | ✅ | ❌ | ❌ | ❌ |
+| Curated registry (95+) | ✅ | ❌ | ❌ | ❌ |
 | One-command install | ✅ | ❌ | ❌ | ❌ |
 | Categories & browsing | ✅ | ❌ | ❌ | ❌ |
 | CI/CD integration | ✅ | ✅ | ❌ | ✅ |
@@ -38,21 +38,13 @@ MCP Doctor is the only tool that combines **security scanning**, **quality scori
 
 ## ✨ Features
 
-<<<<<<< HEAD
-- 🔒 **Security Scan** — Detect prompt injection vectors, unsafe file access, network exfiltration risks, and credential leakage
+- 🔒 **Security Scan** — 8 detection engines: prompt injection, path traversal, credential leakage, network exfiltration, command injection, SSRF, supply chain, and excessive permissions
 - 📊 **Quality Score** — Automated 0-100 scoring based on: security, maintenance, documentation, testing, community
 - ⚖️ **Compare** — Side-by-side comparison of two MCP servers across all quality dimensions
-- 📦 **Registry** — Curated database of 91+ popular MCP servers with pre-computed scores and categories
+- 📦 **Registry** — Curated database of 100+ popular MCP servers with pre-computed scores and categories
 - ⚡ **Quick Install** — `mcp-doctor install <server>` — one command to scan + score + install
 - 🩺 **CI/CD Audit** — `mcp-doctor audit <server>` — full report with exit codes for pipelines
 - 📈 **Stats** — Registry overview with category breakdowns and averages
-=======
-- 🔒 **Security Scan** — 6 detection engines: prompt injection, path traversal, credential leakage, network exfiltration, command injection, and excessive permissions
-- 📊 **Quality Score** — Automated scoring based on: code quality, test coverage, documentation, maintenance activity, community health
-- 📦 **Registry** — Curated database of 60+ MCP servers across 17 categories with pre-computed scores
-- ⚡ **Quick Install** — `mcp-doctor install <server>` — one command to scan + install + configure
-- 🎯 **One-Stop Toolkit** — Unlike scanners that only detect vulns, MCP Doctor combines security + quality + installation in one CLI
->>>>>>> 782fc67 (feat: add command injection & excessive permissions checks, update README)
 
 ## 🚀 Quick Start
 
@@ -102,11 +94,11 @@ MCP Doctor scans for common MCP vulnerability patterns:
 - **Prompt Injection** — User input flowing directly into LLM prompts without sanitization
 - **Path Traversal** — File system tools accepting `../` in paths without validation
 - **Credential Leakage** — API keys, tokens, or secrets exposed in logs or responses
-<<<<<<< HEAD
 - **Network Exfiltration** — Suspicious external endpoints (webhook.site, ngrok tunnels)
 - **Supply Chain** — Typosquatting, abandoned dependencies, known CVEs
 - **SSRF** — Server-side request forgery via unvalidated URL parameters
 - **Command Injection** — Shell command execution with unsanitized input
+- **Excessive Permissions** — Auth bypass flags, unrestricted filesystem globs, world-readable permissions
 - **Unconstrained Parameters** — String params without maxLength/pattern/enum (DoS + injection chain risk)
 - **Tool Access Control Bypass** — Presentation-layer filtering without execution-layer enforcement (CVE-2026-46519 pattern)
 
@@ -132,11 +124,6 @@ $ mcp-doctor compare @modelcontextprotocol/server-postgres mcp-server-mysql
 
 ✔ Recommendation: @modelcontextprotocol/server-postgres (score 90 vs 78)
 ```
-=======
-- **Network Exfiltration** — Suspicious webhook endpoints, ngrok tunnels, or data leaks
-- **Command Injection** — `subprocess`, `os.system`, `eval()`, `exec()` with user input, `shell=True` usage
-- **Excessive Permissions** — Auth bypass flags, unrestricted filesystem globs, world-readable permissions
->>>>>>> 782fc67 (feat: add command injection & excessive permissions checks, update README)
 
 ## 📖 MCP Server Registry
 
@@ -150,7 +137,7 @@ Categories:
 - 💬 Communication — Slack, Discord, Gmail, Telegram, WhatsApp
 - 🧠 Knowledge — Notion, Obsidian, Memory, Confluence
 - 🤖 AI/ML — FastMCP, Hugging Face, Replicate, Ollama
-- 🔒 Security — Semgrep, NVD CVE, GhidraMCP, MCP Audit, MCPSec
+- 🔒 Security — Semgrep, NVD CVE, GhidraMCP, MCP Audit, MCPSec, HexStrike AI
 - 🎨 Design — Figma Context MCP
 - 📋 Productivity — Google Maps, Linear, Airtable, Google Calendar, Todoist, Kreuzberg
 - 🖥️ System — DesktopCommanderMCP, Windows-MCP

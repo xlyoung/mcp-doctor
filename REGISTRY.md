@@ -2,7 +2,7 @@
 
 A curated, scored database of Model Context Protocol (MCP) servers. Use `mcp-doctor list` to browse, or `mcp-doctor scan` to check any server before installing.
 
-> **Last updated:** 2026-06-07 | **Total servers:** 91+ | **Categories:** 20+
+> **Last updated:** 2026-06-07 | **Total servers:** 95+ | **Categories:** 22+
 
 ## 📊 Top Servers by Score
 
@@ -39,14 +39,14 @@ Slack, Discord, Gmail, Telegram, WhatsApp
 ### 🧠 Knowledge & Notes (4 servers)
 Notion, Obsidian, Memory, Confluence
 
-### 🤖 AI / ML (7 servers)
-FastMCP, Hugging Face, Ollama, Replicate, OpenAI, Serena, Headroom
+### 🤖 AI / ML (8 servers)
+FastMCP, Hugging Face, Ollama, Replicate, OpenAI, Serena, Headroom, PAL (multi-model aggregator)
 
 ### 📋 Productivity (6 servers)
 Google Maps, Linear, Airtable, Google Calendar, Todoist, Kreuzberg (document processing)
 
-### 🔒 Security (5 servers)
-Semgrep, NVD CVE, GhidraMCP, MCP Audit, MCPSec
+### 🔒 Security (6 servers)
+Semgrep, NVD CVE, GhidraMCP, MCP Audit, MCPSec, HexStrike AI
 
 ### 🖥️ System & Desktop (2 servers)
 DesktopCommanderMCP, Windows-MCP
