@@ -3,6 +3,7 @@
 **Scan · Score · Install — Your MCP Server Toolkit**
 
 [![GitHub Stars](https://img.shields.io/github/stars/xlyoung/mcp-doctor?style=social)](https://github.com/xlyoung/mcp-doctor)
+[![CI](https://github.com/xlyoung/mcp-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/xlyoung/mcp-doctor/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/mcpdoctor.svg)](https://pypi.org/project/mcpdoctor/)
 [![PyPI Downloads](https://img.shields.io/pypi/dm/mcpdoctor.svg)](https://pypi.org/project/mcpdoctor/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -155,11 +156,19 @@ pip install -e ".[dev]"
 pytest
 ```
 
-## 📝 Contributing
+## 🤝 Contributing
 
 Found an MCP server that should be in the registry? Open an [issue](https://github.com/xlyoung/mcp-doctor/issues/new) or submit a PR!
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+## 🔐 Security
+
+Found a security vulnerability? See [SECURITY.md](./SECURITY.md) for responsible disclosure guidelines.
+
+## 📜 Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
 
 ## 📄 License
 

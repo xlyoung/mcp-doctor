@@ -23,7 +23,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install MCP Doctor
-        run: pip install mcp-doctor
+        run: pip install mcpdoctor
 
       - name: Scan MCP server
         run: |

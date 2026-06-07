@@ -16,7 +16,7 @@ console = Console()
 @click.group()
 @click.version_option(package_name="mcp-doctor")
 def main():
-    """\[emoji] MCP Doctor — Scan, Score, Install MCP Servers with confidence."""
+    """MCP Doctor — Scan, Score, Install MCP Servers with confidence."""
     pass
 
 
@@ -107,7 +107,6 @@ def install(server: str, force: bool):
 @click.option("--json", "as_json", is_flag=True, help="Output as JSON")
 def compare(server_a: str, server_b: str, as_json: bool):
     """Compare two MCP servers side-by-side."""
-    console.print(f"\n[bold]Comparing:[/bold] {server_a} vs {server_b}\n")
 
     score_a = score_server(server_a)
     score_b = score_server(server_b)
@@ -120,6 +119,8 @@ def compare(server_a: str, server_b: str, as_json: bool):
             "server_b": {"name": server_b, "score": score_b, "scan": scan_b},
         }, indent=2))
         return
+
+    console.print(f"\n[bold]Comparing:[/bold] {server_a} vs {server_b}\n")
 
     # Side-by-side comparison table
     table = Table(show_header=True, header_style="bold magenta", title="MCP Server Comparison")
@@ -204,8 +205,11 @@ def audit(server: str, as_json: bool, threshold: int, fail_on_critical: bool):
 
     if as_json:
         click.echo(json.dumps(report, indent=2))
-    else:
-        _render_audit(report)
+        if not passed:
+            sys.exit(1)
+        return
+
+    _render_audit(report)
 
     if not passed:
         if critical > 0:
