@@ -74,6 +74,9 @@ MCP Doctor is the only tool that combines **security scanning**, **quality scori
 # Install
 pip install mcpdoctor
 
+# Or install directly from GitHub (if PyPI not yet available)
+pip install git+https://github.com/xlyoung/mcp-doctor
+
 # Scan an MCP server for security issues
 mcp-doctor scan @modelcontextprotocol/server-filesystem
 
