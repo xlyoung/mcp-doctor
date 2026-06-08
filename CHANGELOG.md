@@ -8,17 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `mcp-doctor audit` — full security + quality audit for CI/CD pipelines with exit codes
-- `mcp-doctor audit --json` — machine-readable audit output
-- `mcp-doctor audit --threshold N` — configurable quality score threshold
-- Tool access control bypass detection (CVE-2026-46519 pattern)
-- Unconstrained parameter detection for MCP tool schemas
-- Excessive permissions check (auth bypass flags, unrestricted globs)
-- `SECURITY.md` — vulnerability reporting policy
-- `CODE_OF_CONDUCT.md` — contributor covenant
-- `CHANGELOG.md` — this file
-- CI badge in README
-- Reusable GitHub Action for MCP security scanning (`.github/workflows/mcp-scan-action.yml`)
+- `--ci` flag for `mcp-doctor scan` — CI-friendly mode with JSON output and exit codes
+- Unsafe deserialization detection (pickle, yaml.load, marshal, shelve, jsonpickle)
+- Dynamic import detection (__import__, importlib, require with user input)
+- Log injection detection (user input in log statements)
+- `.github/workflows/security-scan.yml` — ready-to-use CI workflow
+- New test suite for scanner security checks (`test_scanner_new_checks.py`)
+
+### Changed
+- Improved `mcp-scan-action.yml` with `--ci` flag and `fail_on_high` option
+- Security engine count: 9 → 12 detection engines
 
 ### Fixed
 - Fixed incorrect PyPI package name in GitHub Action (`mcp-doctor` → `mcpdoctor`)

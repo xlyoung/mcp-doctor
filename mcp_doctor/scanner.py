@@ -17,6 +17,9 @@ def scan_server(server_ref: str) -> dict[str, Any]:
         _check_unconstrained_params,
         _check_tool_access_control,
         _check_excessive_permissions,
+        _check_unsafe_deserialization,
+        _check_dynamic_import,
+        _check_log_injection,
     ]
     for check in checks:
         found = check(source, server_ref)
@@ -249,4 +252,63 @@ def _check_excessive_permissions(source: str, server: str) -> list[dict]:
                 "title": "Excessive permissions",
                 "detail": desc,
             })
+    return issues
+
+
+def _check_unsafe_deserialization(source: str, server: str) -> list[dict]:
+    """Check for unsafe deserialization patterns.
+
+    Detects pickle.loads(), yaml.load() without SafeLoader, marshal.loads(),
+    and shelve.open() with untrusted data — all known RCE vectors.
+    """
+    issues = []
+    patterns = [
+        (r'pickle\.loads?\(', "pickle.load/loads on untrusted data enables arbitrary code execution", "critical"),
+        (r'yaml\.load\([^)]*(?!Loader\s*=\s*(?:yaml\.)?SafeLoader)', "yaml.load() without SafeLoader allows arbitrary Python object instantiation", "high"),
+        (r'marshal\.loads?\(', "marshal.load/loads can execute arbitrary code from crafted bytes", "critical"),
+        (r'shelve\.open\(', "shelve.open() uses pickle internally — untrusted DB files enable RCE", "high"),
+        (r'jsonpickle\.decode\(', "jsonpickle.decode() can instantiate arbitrary Python objects", "critical"),
+    ]
+    for pat, desc, severity in patterns:
+        if re.search(pat, source, re.IGNORECASE):
+            issues.append({"severity": severity, "title": "Unsafe deserialization", "detail": desc})
+    return issues
+
+
+def _check_dynamic_import(source: str, server: str) -> list[dict]:
+    """Check for dynamic code import/execution from user input.
+
+    Detects __import__(), importlib.import_module() with user input,
+    and dynamic require() in Node.js — code injection vectors.
+    """
+    issues = []
+    patterns = [
+        (r'__import__\((?:.*(?:request|input|user|args))', "__import__() with user-controlled module name", "high"),
+        (r'importlib\.import_module\((?:.*(?:request|input|user|args))', "Dynamic module import from user input", "high"),
+        (r'require\((?:.*(?:request|input|user|args))', "Node.js require() with user-controlled path", "high"),
+        (r'importlib\.import_module\(.*f["\']', "Dynamic module import with f-string (indirect user input risk)", "medium"),
+    ]
+    for pat, desc, severity in patterns:
+        if re.search(pat, source, re.IGNORECASE):
+            issues.append({"severity": severity, "title": "Dynamic code import", "detail": desc})
+    return issues
+
+
+def _check_log_injection(source: str, server: str) -> list[dict]:
+    """Check for log injection vulnerabilities.
+
+    Detects user input flowing directly into log statements without
+    sanitization — enables log forging, CRLF injection, and in some
+    cases log4shell-style attacks.
+    """
+    issues = []
+    patterns = [
+        (r'(?:logging|logger|console)\.(?:info|warn|error|debug|log)\(.*(?:request|input|user|args).*\+',
+         "User input concatenated into log messages (log forging / CRLF injection)"),
+        (r'(?:logging|logger|console)\.(?:info|warn|error|debug|log)\(.*f["\'].*(?:request|input|user|args)',
+         "User input in f-string log message without sanitization"),
+    ]
+    for pat, desc in patterns:
+        if re.search(pat, source, re.IGNORECASE):
+            issues.append({"severity": "low", "title": "Log injection risk", "detail": desc})
     return issues
