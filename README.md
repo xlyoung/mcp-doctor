@@ -4,8 +4,8 @@
 
 [![GitHub Stars](https://img.shields.io/github/stars/xlyoung/mcp-doctor?style=social)](https://github.com/xlyoung/mcp-doctor)
 [![CI](https://github.com/xlyoung/mcp-doctor/actions/workflows/ci.yml/badge.svg)](https://github.com/xlyoung/mcp-doctor/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/mcpdoctor.svg)](https://pypi.org/project/mcpdoctor/)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/mcpdoctor.svg)](https://pypi.org/project/mcpdoctor/)
+[![PyPI](https://img.shields.io/pypi/v/mcpdoctor-cli.svg)](https://pypi.org/project/mcpdoctor-cli/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/mcpdoctor-cli.svg)](https://pypi.org/project/mcpdoctor-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Security Scanner](https://img.shields.io/badge/security-scanner-red.svg)](https://github.com/xlyoung/mcp-doctor#-security-checks)
@@ -73,7 +73,7 @@ A study of 39,884 open-source MCP servers found **106 zero-day vulnerabilities**
 
 ```bash
 # Install
-pip install mcpdoctor
+pip install mcpdoctor-cli
 
 # Or install directly from GitHub (if PyPI not yet available)
 pip install git+https://github.com/xlyoung/mcp-doctor
