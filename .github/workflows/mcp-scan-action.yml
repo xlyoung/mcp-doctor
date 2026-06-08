@@ -10,6 +10,10 @@ on:
       server_ref:
         description: "MCP server to scan (GitHub ref or npm package)"
         required: false
+      fail_on_high:
+        description: "Fail on high severity issues (default: true)"
+        required: false
+        default: "true"
 
 jobs:
   scan:
@@ -25,17 +29,27 @@ jobs:
       - name: Install MCP Doctor
         run: pip install mcpdoctor
 
-      - name: Scan MCP server
+      - name: Scan MCP server (CI mode)
         run: |
           SERVER="${{ github.event.inputs.server_ref || '' }}"
+          FAIL_HIGH="${{ github.event.inputs.fail_on_high || 'true' }}"
+
           if [ -z "$SERVER" ]; then
-            echo "No server specified, scanning repo..."
+            echo "::notice::No server specified, scanning current repo..."
             REPO="${{ github.repository }}"
-            mcp-doctor scan "$REPO" || true
+            if [ "$FAIL_HIGH" = "true" ]; then
+              mcp-doctor scan "$REPO" --ci
+            else
+              mcp-doctor scan "$REPO" --json || true
+            fi
           else
-            mcp-doctor scan "$SERVER" || true
+            if [ "$FAIL_HIGH" = "true" ]; then
+              mcp-doctor scan "$SERVER" --ci
+            else
+              mcp-doctor scan "$SERVER" --json || true
+            fi
           fi
 
       - name: Score MCP server
         if: github.event.inputs.server_ref != ''
-        run: mcp-doctor score "${{ github.event.inputs.server_ref }}" || true
+        run: mcp-doctor score "${{ github.event.inputs.server_ref }}" --json

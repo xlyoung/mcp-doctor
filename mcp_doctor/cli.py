@@ -23,13 +23,23 @@ def main():
 @main.command()
 @click.argument("server")
 @click.option("--json", "as_json", is_flag=True, help="Output as JSON")
-def scan(server: str, as_json: bool):
+@click.option("--ci", is_flag=True, help="CI mode: JSON output, exit non-zero on critical/high issues")
+def scan(server: str, as_json: bool, ci: bool):
     """Scan an MCP server for security vulnerabilities."""
     result = scan_server(server)
-    if as_json:
+    if as_json or ci:
         click.echo(json.dumps(result, indent=2))
     else:
         _render_scan(result)
+
+    if ci:
+        critical = result.get("critical", 0)
+        high = result.get("high", 0)
+        if critical > 0 or high > 0:
+            console.print(f"\n[red bold]✖ CI FAIL: {critical} critical, {high} high issue(s)[/red bold]")
+            sys.exit(1)
+        else:
+            console.print(f"\n[green bold]✔ CI PASS: {len(result.get('issues', []))} issue(s), none critical/high[/green bold]")
 
 
 @main.command()

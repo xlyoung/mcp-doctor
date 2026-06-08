@@ -118,3 +118,34 @@ def test_install_help():
     result = runner.invoke(main, ["install", "--help"])
     assert result.exit_code == 0
     assert "--force" in result.output
+
+
+def test_scan_ci_flag_help():
+    result = runner.invoke(main, ["scan", "--help"])
+    assert result.exit_code == 0
+    assert "--ci" in result.output
+
+
+def test_scan_ci_json_output():
+    """--ci flag should produce JSON output."""
+    result = runner.invoke(main, ["scan", "modelcontextprotocol/servers", "--ci"])
+    # Should produce JSON output (exit code depends on findings)
+    assert result.exit_code in (0, 1)
+    # Output starts with JSON — find the first { and parse from there
+    import json
+    output = result.output
+    json_start = output.find("{")
+    assert json_start >= 0, f"No JSON found in output: {output[:200]}"
+    # Find the matching closing brace
+    brace_count = 0
+    json_end = json_start
+    for i, ch in enumerate(output[json_start:], json_start):
+        if ch == "{":
+            brace_count += 1
+        elif ch == "}":
+            brace_count -= 1
+            if brace_count == 0:
+                json_end = i + 1
+                break
+    data = json.loads(output[json_start:json_end])
+    assert "issues" in data

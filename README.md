@@ -18,7 +18,7 @@
 
 | 📦 Registry | 🔒 Security Checks | 📊 Quality Dimensions |
 |:-----------:|:-------------------:|:--------------------:|
-| **100+** servers scored | **10** detection engines | **5** scoring categories |
+| **100+** servers scored | **12** detection engines | **5** scoring categories |
 
 ---
 
@@ -61,7 +61,7 @@ A study of 39,884 open-source MCP servers found **106 zero-day vulnerabilities**
 
 ## ✨ Features
 
-- 🔒 **Security Scan** — 8 detection engines: prompt injection, path traversal, credential leakage, network exfiltration, command injection, SSRF, supply chain, and excessive permissions
+- 🔒 **Security Scan** — 12 detection engines: prompt injection, path traversal, credential leakage, network exfiltration, command injection, SSRF, supply chain, excessive permissions, tool access control bypass, unsafe deserialization, dynamic import, log injection
 - 📊 **Quality Score** — Automated 0-100 scoring based on: security, maintenance, documentation, testing, community
 - ⚖️ **Compare** — Side-by-side comparison of two MCP servers across all quality dimensions
 - 📦 **Registry** — Curated database of 100+ popular MCP servers with pre-computed scores and categories
@@ -152,6 +152,37 @@ MCP Doctor scans for common MCP vulnerability patterns:
 - **Excessive Permissions** — Auth bypass flags, unrestricted filesystem globs, world-readable permissions
 - **Unconstrained Parameters** — String params without maxLength/pattern/enum (DoS + injection chain risk)
 - **Tool Access Control Bypass** — Presentation-layer filtering without execution-layer enforcement (CVE-2026-46519 pattern)
+- **Unsafe Deserialization** — pickle, yaml.load, marshal, shelve, jsonpickle with untrusted data
+- **Dynamic Import** — __import__(), importlib, require() with user-controlled module names
+- **Log Injection** — User input concatenated into log messages (forging, CRLF injection)
+
+## 🔄 CI/CD Integration
+
+### In your pipeline
+
+```bash
+# Scan and fail on critical/high issues
+mcp-doctor scan <server> --ci
+
+# Full audit with custom threshold
+mcp-doctor audit <server> --threshold 70 --json
+```
+
+### GitHub Action
+
+Add to `.github/workflows/security-scan.yml` in your repo:
+
+```yaml
+name: MCP Security Scan
+on: [push, pull_request]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install mcpdoctor
+      - run: mcp-doctor scan ${{ github.repository }} --ci
+```
 
 ## ⚖️ Compare Servers
 
