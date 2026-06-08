@@ -44,19 +44,20 @@ A study of 39,884 open-source MCP servers found **106 zero-day vulnerabilities**
 
 ### MCP Doctor vs Other Tools
 
-| Feature | MCP Doctor | mcp-scan | mcp-shield | mcpsec | Bawbel | mcp-fence |
-|---------|:----------:|:--------:|:----------:|:------:|:------:|:---------:|
-| Security scanning | ✅ 10 engines | ✅ | ✅ 20 rules | ✅ fuzzer | ✅ 6 engines | ✅ proxy |
-| Quality scoring (0-100) | ✅ | ❌ | ✅ (A-F) | ❌ | ❌ | ❌ |
+| Feature | MCP Doctor | Cisco mcp-scanner | Snyk Agent Scan | Oxvault | mcp-shield | mcpsec |
+|---------|:----------:|:-----------------:|:---------------:|:-------:|:----------:|:------:|
+| Security scanning | ✅ 10 engines | ✅ YARA+LLM+API | ✅ LLM+guardrails | ✅ SAST+runtime | ✅ 20 rules | ✅ fuzzer |
+| Quality scoring (0-100) | ✅ | ❌ | ❌ | ❌ | ✅ (A-F) | ❌ |
 | Curated registry (100+) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Server comparison | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | One-command install | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| CI/CD integration | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Response-side scanning | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Local / no API dependency | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| Categories & browsing | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| CI/CD integration | ✅ | ✅ | ✅ | ✅ (SARIF) | ❌ | ❌ |
+| Runtime proxy mode | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| REST API server | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Local / no API dependency | ✅ | ✅ | ❌ (needs token) | ✅ | ✅ | ✅ |
+| SARIF output | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
 
-MCP Doctor is the only tool that combines **security scanning**, **quality scoring**, **server comparison**, and a **curated registry** into a single CLI. Other tools excel in specific areas — mcp-fence for response-side scanning, mcpsec for protocol fuzzing, Bawbel for multi-engine analysis — but none offer the full pre-installation workflow.
+> **How MCP Doctor fits:** Cisco mcp-scanner and Snyk Agent Scan are excellent for auditing existing deployments. Oxvault is best for deep SAST of MCP source code. **MCP Doctor is for the pre-install workflow** — discover, compare, and install servers with confidence. Most teams need both: a scanner for what's deployed and a discovery tool for what to deploy next.
 
 ## ✨ Features
 
