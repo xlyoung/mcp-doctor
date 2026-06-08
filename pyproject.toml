@@ -3,7 +3,7 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mcpdoctor"
+name = "mcpdoctor-cli"
 version = "0.1.1"
 description = "Scan, score, and install MCP servers with confidence"
 readme = "README.md"
